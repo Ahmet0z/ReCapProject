@@ -3,11 +3,12 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.InMemory
 {
-    public class InMemoryCarDal : ICarDal
+    public class InMemoryCarDal:ICarDal
     {
         List<Car> _cars;
 
@@ -25,36 +26,29 @@ namespace DataAccess.Concrete.InMemory
 
         }
 
-        public void Add(Car car)
+        public void Add(Car entity)
         {
-            _cars.Add(car);
+            throw new NotImplementedException();
         }
 
-        public void Delete(Car car)
+        public void Delete(Car entity)
         {
-            Car carToDelete = _cars.SingleOrDefault(c => c.CarId == car.CarId);
-            _cars.Remove(carToDelete);
+            throw new NotImplementedException();
         }
 
-        public void Update(Car car)
+        public Car Get(Expression<Func<Car, bool>> filter)
         {
-            Car carToUpdate = _cars.SingleOrDefault(c=> c.CarId==car.CarId);
-            carToUpdate.BrandId = car.BrandId;
-            carToUpdate.ColorId = car.ColorId;
-            carToUpdate.DailyPrice = car.DailyPrice;
-            carToUpdate.Description = car.Description;
-            carToUpdate.ModelYear = car.ModelYear;
+            throw new NotImplementedException();
         }
 
-        public List<Car> GetAll()
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            return _cars;
+            throw new NotImplementedException();
         }
 
-        public List<Car> GetById(int carId)
+        public void Update(Car entity)
         {
-            return _cars.Where(c => c.CarId == carId).ToList();
+            throw new NotImplementedException();
         }
-
     }
 }
