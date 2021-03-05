@@ -23,6 +23,15 @@ namespace ConsoleUI
             {
                 Console.WriteLine(cars.CarId + " " + cars.Description);
             }
+            
+            carManager.Add(new Product{
+                CarId=5, 
+                BrandId=2, 
+                ColorId=3,
+                ModelYear=2013,
+                DailyPrice=200,
+                Description="Manuel"
+            });
 
         }
     }
