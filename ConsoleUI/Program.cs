@@ -34,18 +34,9 @@ namespace ConsoleUI
 
             foreach (var brand in brandManager.GetAll())
             {
-                Console.WriteLine(brand.BrandId + " " + brand.BrandName);
+                Console.WriteLine(cars.CarId + " " + cars.Description);
             }
-        }
 
-        private static void CarTest()
-        {
-            ICarService carManager = new CarManager(new EfCarDal());
-
-            foreach (var car in carManager.GetCarDetails())
-            {
-                Console.WriteLine(car.BrandName + " " + car.CarName + " " + car.ColorName + " " + car.DailyPrice);
-            }
         }
     }
 }
