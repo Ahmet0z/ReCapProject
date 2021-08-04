@@ -1,0 +1,38 @@
+﻿CREATE TABLE Cars (
+Id int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+ColorId int NOT NULL FOREIGN KEY REFERENCES Colors(ColorId),
+BrandId int NOT NULL FOREIGN KEY REFERENCES Brands(BrandId),
+ModelYear int NOT NULL,
+DailyPrice decimal NOT NULL,
+Description varchar(50) NOT NULL
+)
+
+DROP TABLE Cars
+DROP TABLE Brands
+DROP TABLE Colors
+
+INSERT INTO Cars VALUES (1, 1, 2010, 500, '320i')
+INSERT INTO Cars VALUES (2, 2, 2009, 450, 'A3')
+INSERT INTO Cars VALUES (3, 3, 2018, 300, 'Egea')
+INSERT INTO Cars VALUES (3, 1, 2015, 200, 'Doblo')
+INSERT INTO Cars VALUES (3, 2, 2014, 250, 'Astra')
+
+CREATE TABLE Colors (
+ColorId int NOT NULL IDENTITY(1,1) PRIMARY KEY ,
+ColorName varchar(50) NOT NULL
+)
+
+INSERT INTO Colors VALUES ('Beyaz')
+INSERT INTO Colors VALUES ('Siyah')
+INSERT INTO Colors VALUES ('Kırmızı')
+
+CREATE TABLE Brands (
+BrandId int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+BrandName varchar(50) NOT NULL
+);
+
+INSERT INTO Brands VALUES ('BMW')
+INSERT INTO Brands VALUES ('Audi')
+INSERT INTO Brands VALUES ('Fiat')
+INSERT INTO Brands VALUES ('Opel')
+
