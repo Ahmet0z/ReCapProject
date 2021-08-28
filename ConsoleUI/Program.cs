@@ -45,12 +45,19 @@ namespace ConsoleUI
             ICarService carManager = new CarManager(new EfCarDal());
 
             var result = carManager.Get(3);
-            Console.WriteLine(result.Data.CarName);
+            Console.WriteLine(result.Data);
 
-            foreach (var car in carManager.GetCarDetails().Data)
+            var result1 = carManager.GetCarDetails();
+
+            if (result1.Success)
             {
-                Console.WriteLine(car.CarName + " / " + car.BrandName + " / " + car.ColorName + " / " + car.DailyPrice);
+                foreach (var car in result1.Data)
+                {
+                    Console.WriteLine(car.CarName + " / " + car.BrandName + " / " + car.ColorName + " / " + car.DailyPrice);
+                }
             }
+
+            
         }
     }
 }
