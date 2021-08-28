@@ -24,7 +24,7 @@ namespace ConsoleUI
         {
             IBrandService brandManager = new BrandManager(new EfBrandDal());
 
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
             }
@@ -34,7 +34,7 @@ namespace ConsoleUI
         {
             IColorService colorManager = new ColorManager(new EfColorDal());
 
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.ColorName);
             }
@@ -45,9 +45,9 @@ namespace ConsoleUI
             ICarService carManager = new CarManager(new EfCarDal());
 
             var result = carManager.Get(3);
-            Console.WriteLine(result.CarName);
+            Console.WriteLine(result.Data.CarName);
 
-            foreach (var car in carManager.GetCarDetails())
+            foreach (var car in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine(car.CarName + " / " + car.BrandName + " / " + car.ColorName + " / " + car.DailyPrice);
             }
