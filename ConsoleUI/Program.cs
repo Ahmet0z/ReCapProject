@@ -18,6 +18,16 @@ namespace ConsoleUI
 
             //BrandTest();
 
+            IUserService userManager = new UserManager(new EfUserDal());
+            ICustomerService customerManager = new CustomerManager(new EfCustomerDal());
+            IRentalService rentalManager = new RentalManager(new EfRentalDal());
+
+            User user = new User { FirstName = "Ahmet", LastName = "Özpolat", Email = "ozpolatahmet02@gmail.com", Password = "Ahmet123" };
+            Customer customer = new Customer { CompanyName = "Timon MEGA" };
+            Rental rental = new Rental { CustomerId = 1, CarId = 4, RentDate = new DateTime(2021, 08, 31) };
+
+            customerManager.Add(customer);
+            rentalManager.Add(rental);
         }
 
         private static void BrandTest()
