@@ -2,7 +2,6 @@
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
 
@@ -22,8 +21,8 @@ namespace ConsoleUI
             ICustomerService customerManager = new CustomerManager(new EfCustomerDal());
             IRentalService rentalManager = new RentalManager(new EfRentalDal());
 
-
-
+            var result = userManager.GetByMail("ahmet@ozpolat.com");
+            Console.WriteLine(result.Data.FirstName);
 
         }
 

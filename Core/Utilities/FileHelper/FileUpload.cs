@@ -11,41 +11,27 @@ namespace Core.Utilities.FileHelper
 {
     public class FileUpload
     {
-        private const string DefaultImage = "default.jpg";
-
-        private static string directory = Environment.CurrentDirectory + @"\wwwroot\";
-        private static string path = Path.Combine(directory, "Images");
-
-        public static IDataResult<string> Add(IFormFile formFile)
+        private static string carImageFolderName = "Images/";
+        private static string root = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", carImageFolderName);
+        private static string defaultCarImage = "default.png";
+        public static string Upload(IFormFile formFile)
         {
-            try
+            if (formFile.Length > 0)
             {
-                if (formFile == null)
-                    return new SuccessDataResult<string>(Path.Combine(path, DefaultImage));
+                string fileName = Path.GetFileName(formFile.FileName);
+                string guid = Guid.NewGuid().ToString();
+                string fileExtension = Path.GetExtension(fileName);
+                string newFileName = guid + fileExtension;
+                string filePath = root + $@"\{newFileName}";
 
-                string fileName = CreateNewFileName(formFile.FileName);
-                CheckPathExists(path);
-                CreateImageFileByName(formFile, fileName);
-
-                return new SuccessDataResult<string>(Path.Combine(path, fileName));
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    formFile.CopyTo(stream);
+                }
+                return "/" + carImageFolderName + newFileName;
+                //return filePath;
             }
-            catch (Exception exception)
-            {
-                return new ErrorDataResult<string>(exception.Message);
-            }
-        }
-
-        public static IDataResult<string> Update(IFormFile formFile, string oldImagePath)
-        {
-            if (formFile == null || !File.Exists($@"{path}\{oldImagePath}"))
-                return new ErrorDataResult<string>("Dosya mevcut değil");
-
-            DeleteOldImageFile(oldImagePath);
-            CheckPathExists(path);
-
-            string fileName = CreateNewFileName(formFile.FileName);
-            CreateImageFileByName(formFile, fileName);
-            return new SuccessDataResult<string>(Path.Combine(path, fileName));
+            return "";
         }
 
         public static IResult Delete(string path)
@@ -61,39 +47,95 @@ namespace Core.Utilities.FileHelper
             }
         }
 
-        public static string GetDefaultImagePath()
+
+        public static string GetDefaultCarImagePath()
         {
-            return Path.Combine(path, DefaultImage);
+            return "/" + carImageFolderName + defaultCarImage;
         }
 
-        private static string CreateNewFileName(string fileName)
-        {
-            string[] file = fileName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
-            string extension = file[1];
-            var guid = Guid.NewGuid();
+        //private const string DefaultImage = "default.jpg";
 
-            string newFileName = $"{guid}.{extension}";
-            return newFileName;
-        }
+        //private static string directory = Environment.CurrentDirectory + @"\wwwroot\";
+        //private static string path = Path.Combine(directory, "Images");
 
-        private static void CreateImageFileByName(IFormFile formFile, string fileName)
-        {
-            using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
-            {
-                formFile.CopyTo(stream);
-                stream.Flush();
-            }
-        }
+        //public static IDataResult<string> Add(IFormFile formFile)
+        //{
+        //    try
+        //    {
+        //        if (formFile == null)
+        //            return new SuccessDataResult<string>(Path.Combine(path, DefaultImage));
 
-        private static void CheckPathExists(string path)
-        {
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-        }
+        //        string fileName = CreateNewFileName(formFile.FileName);
+        //        CheckPathExists(path);
+        //        CreateImageFileByName(formFile, fileName);
 
-        private static void DeleteOldImageFile(string path)
-        {
-            File.Delete(path.Replace("/", "\\"));
-        }
+        //        return new SuccessDataResult<string>(Path.Combine(path, fileName));
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        return new ErrorDataResult<string>(exception.Message);
+        //    }
+        //}
+
+        //public static IDataResult<string> Update(IFormFile formFile, string oldImagePath)
+        //{
+        //    if (formFile == null || !File.Exists($@"{path}\{oldImagePath}"))
+        //        return new ErrorDataResult<string>("Dosya mevcut değil");
+
+        //    DeleteOldImageFile(oldImagePath);
+        //    CheckPathExists(path);
+
+        //    string fileName = CreateNewFileName(formFile.FileName);
+        //    CreateImageFileByName(formFile, fileName);
+        //    return new SuccessDataResult<string>(Path.Combine(path, fileName));
+        //}
+
+        //public static IResult Delete(string path)
+        //{
+        //    try
+        //    {
+        //        File.Delete(path);
+        //        return new SuccessResult();
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        return new ErrorResult(exception.Message);
+        //    }
+        //}
+
+        //public static string GetDefaultImagePath()
+        //{
+        //    return Path.Combine(path, DefaultImage);
+        //}
+
+        //private static string CreateNewFileName(string fileName)
+        //{
+        //    string[] file = fileName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+        //    string extension = file[1];
+        //    var guid = Guid.NewGuid();
+
+        //    string newFileName = $"{guid}.{extension}";
+        //    return newFileName;
+        //}
+
+        //private static void CreateImageFileByName(IFormFile formFile, string fileName)
+        //{
+        //    using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+        //    {
+        //        formFile.CopyTo(stream);
+        //        stream.Flush();
+        //    }
+        //}
+
+        //private static void CheckPathExists(string path)
+        //{
+        //    if (!Directory.Exists(path))
+        //        Directory.CreateDirectory(path);
+        //}
+
+        //private static void DeleteOldImageFile(string path)
+        //{
+        //    File.Delete(path.Replace("/", "\\"));
+        //}
     }
 }

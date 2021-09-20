@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarImageDal : EfEntityRepositoryBase<CarImage, ReCapContext>
+    public class EfCarImageDal : EfEntityRepositoryBase<CarImage, ReCapContext> , ICarImageDal
     {
 
     }

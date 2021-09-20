@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,7 +17,8 @@ namespace Business.Constants
         public static string CarUpdated = "Araba güncellendi";
         public static string CarsListed = "Arabalar Listelendi";
         public static string CarNameInvalid = "Araç ismi geçersiz";
-        public static string CarDetailEnlarged = "Araç detayı getirildi";
+        public static string CarDetailBrought = "Araç detayı getirildi";
+        public static string CarNotFound = "Araç bulunamadı.";
 
         public static string ColorAdded = "Renk eklendi";
         public static string ColorDeleted = "Renk silindi";
@@ -26,7 +28,9 @@ namespace Business.Constants
         public static string UserAdded = "Kullanıcı eklendi";
         public static string UserDeleted = "Kullanıcı silindi";
         public static string UserUpdated = "Kullanıcı güncellendi";
-        public static string UsersListed = "Kullanıcılar Listelendi";
+        public static string UsersListed = "Kullanıcılar listelendi";
+        public static string UserGetted = "Kullanıcı getirildi";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
 
         public static string CustomerAdded = "Müşteri eklendi";
         public static string CustomerDeleted = "Müşteri silindi";
@@ -44,6 +48,14 @@ namespace Business.Constants
         public static string ImageUpdated = "Resim güncellendi";
         public static string ImagessListed = "Resimler Listelendi";
         public static string CarImageLimitExceded = "Bir aracın en fazla 5 fotoğrafı olabilir.";
-        public static string CarNotFound = "Araç bulunamadı.";
+        public static string NotFoundImage = "Resim bulunamadı";
+        
+        public static string ClaimsListed = "Roller Listelendi";
+
+        public static string PasswordError = "Şifre hatalı";
+        public static string SuccessfulLogin = "Giriş başarılı";
+        public static string UserAlreadyExists = "Kullanıcı mevcut";
+        public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
+        public static string AccessTokenCreated = "Access Token başarıyla oluşturuldu";
     }
 }
