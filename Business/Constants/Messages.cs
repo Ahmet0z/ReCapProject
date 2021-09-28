@@ -42,6 +42,7 @@ namespace Business.Constants
         public static string RentalDeleted = "Kiralama bilgisi silindi";
         public static string RentalUpdated = "Kiralama bilgisi güncellendi";
         public static string RentalsListed = "Kiralama bilgileri Listelendi";
+        public static string RentalDetailsListed = "Kiralama Detayları Listelendi";
         public static string CarIsOnRent = "Araç şuan bir başkası tarafından kiralanmıştır";
 
         public static string ImageAdded = "Resim eklendi";
@@ -50,7 +51,7 @@ namespace Business.Constants
         public static string ImagessListed = "Resimler Listelendi";
         public static string CarImageLimitExceded = "Bir aracın en fazla 5 fotoğrafı olabilir.";
         public static string NotFoundImage = "Resim bulunamadı";
-        
+
         public static string ClaimsListed = "Roller Listelendi";
 
         public static string PasswordError = "Şifre hatalı";
@@ -60,5 +61,6 @@ namespace Business.Constants
         public static string AccessTokenCreated = "Access Token başarıyla oluşturuldu";
 
         public static string AuthorizationDenied = "Yetkiniz bulunmamaktadır.";
+
     }
 }
