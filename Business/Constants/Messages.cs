@@ -62,5 +62,9 @@ namespace Business.Constants
 
         public static string AuthorizationDenied = "Yetkiniz bulunmamaktadır.";
 
+        public static string GetDefaultImage { get; internal set; }
+        public static string NoPictureOfTheCar { get; internal set; }
+        public static string ErrorDeletingImage { get; internal set; }
+        public static string ErrorUpdatingImage { get; internal set; }
     }
 }

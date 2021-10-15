@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//[PerformanceAspect((time))]
 namespace Core.Aspects.Autofac.Performance
 {
     public class PerformanceAspect : MethodInterception

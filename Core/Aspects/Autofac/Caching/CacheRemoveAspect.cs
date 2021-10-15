@@ -5,7 +5,8 @@ using Core.Utilities.IoC;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Aspects.Autofac.Caching
-{
+{   //                   hangi aktiviteleri cache'den sileceğini burada belirtiyoruz
+    //[CacheRemoveAspect("ICarService.get")]
     public class CacheRemoveAspect : MethodInterception
     {
         private string _pattern;

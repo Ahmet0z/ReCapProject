@@ -43,6 +43,10 @@ namespace WebAPI
             //{
             //    options.AddPolicy("AllowOrigin", builder => builder.WithOrigins("http://localhost:4200/"));
             //});
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
+            });
 
             services.AddCors();
 
@@ -64,6 +68,7 @@ namespace WebAPI
             services.AddDependencyResolvers(new ICoreModule[] {
                 new CoreModule()
             });
+            
 
         }
 
@@ -73,6 +78,8 @@ namespace WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
             }
 
             app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
@@ -88,7 +95,9 @@ namespace WebAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
             });
+
         }
     }
 }

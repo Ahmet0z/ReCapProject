@@ -1,11 +1,7 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace WebAPI.Controllers
 {
@@ -13,7 +9,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CarImagesController : ControllerBase
     {
-        ICarImageService _carImageService;
+        private readonly ICarImageService _carImageService;
 
         public CarImagesController(ICarImageService carImageService)
         {
@@ -31,10 +27,20 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbycarid")]
-        public IActionResult GetByCarId(int carId)
+        [HttpGet("getallbycarid")]
+        public IActionResult GetAllByCarId(int carId)
         {
-            var result = _carImageService.GetImagesByCarId(carId);
+            var result = _carImageService.GetCarImagesById(carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int imageId)
+        {
+            var result = _carImageService.GetById(imageId);
             if (result.Success)
             {
                 return Ok(result);
@@ -43,19 +49,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add([FromForm] IFormFile formFile, [FromForm] CarImage carImage)
+        public IActionResult Add([FromForm] Image image, [FromForm] CarImage carImage)
         {
-            var result = _carImageService.UploadCarImage(formFile, carImage);
+
+            var result = _carImageService.Add(image, carImage);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
-
         [HttpPost("delete")]
-        public IActionResult Delete (CarImage carImage)
+        public IActionResult Delete(CarImage carImage)
         {
             var result = _carImageService.Delete(carImage);
             if (result.Success)
@@ -66,9 +71,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(CarImage carImage)
+        public IActionResult Update([FromForm] Image image, [FromForm] CarImage carImage)
         {
-            var result = _carImageService.Update( carImage);
+            var result = _carImageService.Update(carImage, image);
             if (result.Success)
             {
                 return Ok(result);

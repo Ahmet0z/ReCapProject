@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Core.Aspects.Autofac.Caching
 {
+    //[CacheAspect]
     public class CacheAspect : MethodInterception
     {
         private int _duration;
