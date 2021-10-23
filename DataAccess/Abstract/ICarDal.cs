@@ -1,9 +1,8 @@
-﻿using Entities.Concrete;
-using Core.DataAccess;
+﻿using Core.DataAccess;
+using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Entities.DTOs;
 using System.Linq.Expressions;
 
 namespace DataAccess.Abstract

@@ -7,6 +7,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
+using Core.Entities.Concrete;
 using Core.Utilities.Business;
 using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Results;
@@ -59,7 +60,7 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.CarImageLimitExceded);
             }
 
-            var imageResult = FileHelper.Upload(image.file);
+            var imageResult = FileHelper.Upload(image.File);
 
             if (!imageResult.Success)
             {
@@ -84,7 +85,7 @@ namespace Business.Concrete
             }
 
             var updatedImage = _carImageDal.Get(c => c.Id == carImage.Id);
-            var result = FileHelper.Update(image.file, updatedImage.ImagePath);
+            var result = FileHelper.Update(image.File, updatedImage.ImagePath);
             if (!result.Success)
             {
                 return new ErrorResult(Messages.ErrorUpdatingImage);

@@ -1,13 +1,8 @@
-﻿using Core.Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
-
-namespace Business.Constants
+﻿namespace Business.Constants
 {
     public static class Messages
     {
+        public static string BrandNotFound = "Model bulunamadı.";
         public static string BrandAdded = "Model eklendi";
         public static string BrandDeleted = "Model silindi";
         public static string BrandUpdated = "Model güncellendi";
@@ -20,11 +15,14 @@ namespace Business.Constants
         public static string CarNameInvalid = "Araç ismi geçersiz";
         public static string CarDetailBrought = "Araç detayı getirildi";
         public static string CarNotFound = "Araç bulunamadı.";
+        public static string CarsCouldntListed ="Araçlar listelenemedi.";
 
         public static string ColorAdded = "Renk eklendi";
         public static string ColorDeleted = "Renk silindi";
         public static string ColorUpdated = "Renk güncellendi";
         public static string ColorsListed = "Renkler Listelendi";
+        public static string ColorNotFound = "Renk bulunamadı";
+
 
         public static string UserAdded = "Kullanıcı eklendi";
         public static string UserDeleted = "Kullanıcı silindi";
@@ -32,6 +30,11 @@ namespace Business.Constants
         public static string UsersListed = "Kullanıcılar listelendi";
         public static string UserGetted = "Kullanıcı getirildi";
         public static string UserNotFound = "Kullanıcı bulunamadı";
+
+        public static string CardAdded = "Kart eklendi";
+        public static string CardDeleted = "Kart silindi.";
+        public static string CardUpdated = "Kart güncellendi.";
+        public static string CardListed = "Kartlar Listelendi";
 
         public static string CustomerAdded = "Müşteri eklendi";
         public static string CustomerDeleted = "Müşteri silindi";
@@ -51,6 +54,11 @@ namespace Business.Constants
         public static string ImagessListed = "Resimler Listelendi";
         public static string CarImageLimitExceded = "Bir aracın en fazla 5 fotoğrafı olabilir.";
         public static string NotFoundImage = "Resim bulunamadı";
+        public static string NoPictureOfTheCar = "Arabanın resmi bulunmamaktadır.";
+        public static string ErrorDeletingImage = "Resim kaldırma başarısız.";
+        public static string ErrorUpdatingImage = "Resim güncelleme başarısız.";
+        public static string GetDefaultImage = "Default resin getirildi.";
+
 
         public static string ClaimsListed = "Roller Listelendi";
 
@@ -61,10 +69,6 @@ namespace Business.Constants
         public static string AccessTokenCreated = "Access Token başarıyla oluşturuldu";
 
         public static string AuthorizationDenied = "Yetkiniz bulunmamaktadır.";
-
-        public static string GetDefaultImage { get; internal set; }
-        public static string NoPictureOfTheCar { get; internal set; }
-        public static string ErrorDeletingImage { get; internal set; }
-        public static string ErrorUpdatingImage { get; internal set; }
+        public static string cardNotFound = "Böyle bir kart bulunamadı.";
     }
 }

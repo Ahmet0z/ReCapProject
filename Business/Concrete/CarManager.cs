@@ -3,24 +3,27 @@ using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
-using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
         private ICarDal _carDal;
+        private IBrandService _brandService;
+        private IColorService _colorService;
 
-        public CarManager(ICarDal dal)
+        public CarManager(ICarDal dal, IBrandService brandService, IColorService colorService)
         {
             _carDal = dal;
+            _brandService = brandService;
+            _colorService = colorService;
         }
 
         [CacheRemoveAspect("ICarService.get")]
@@ -87,6 +90,18 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == colorId), Messages.CarDetailBrought);
         }
 
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandAndColor(int brandId, int colorId)
+        {
+            var result = BusinessRules.Run(IsColorExists(colorId), IsBrandExists(brandId));
+            if (result != null)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.CarsCouldntListed);
+            }
+
+
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == colorId && c.BrandId == brandId));
+        }
+
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id),Messages.CarsListed);
@@ -95,6 +110,26 @@ namespace Business.Concrete
         public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id),Messages.CarsListed);
+        }
+
+        private IResult IsBrandExists(int brandId)
+        {
+            var result = _brandService.GetById(brandId);
+            if (result != null)
+            {
+                return new SuccessResult();
+            }
+            return new ErrorResult();
+        }
+
+        private IResult IsColorExists(int colorId)
+        {
+            var result = _colorService.GetById(colorId);
+            if (result != null)
+            {
+                return new SuccessResult();
+            }
+            return new ErrorResult();
         }
     }
 }

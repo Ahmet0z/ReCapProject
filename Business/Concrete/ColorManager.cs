@@ -2,12 +2,11 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Business.Concrete
 {
@@ -38,10 +37,30 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll(),Messages.ColorsListed);
         }
 
+        public IDataResult<Color> GetById(int colorId)
+        {
+            var result = BusinessRules.Run(CheckIfColorExist(colorId));
+            if (result != null)
+            {
+                return new ErrorDataResult<Color>(Messages.ColorNotFound);
+            }
+            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == colorId));
+        }
+
         public IResult Update(Color color)
         {
             _colorDal.Update(color);
             return new SuccessResult(Messages.ColorUpdated);
+        }
+
+        private IDataResult<int> CheckIfColorExist(int colorId)
+        {
+            var result = _colorDal.Get(c => c.ColorId == colorId);
+            if (result == null)
+            {
+                return new ErrorDataResult<int>();
+            }
+            return new SuccessDataResult<int>(colorId);
         }
     }
 }
