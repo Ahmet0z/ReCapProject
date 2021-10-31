@@ -58,5 +58,16 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int colorId)
+        {
+            var result = _colorService.GetById(colorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

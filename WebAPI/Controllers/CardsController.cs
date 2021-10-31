@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CardsController : ControllerBase
     {
@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
             _cardService = cardService;
         }
 
-        [HttpPost]
+        [HttpPost("add")]
         public IActionResult Add(Card card)
         {
             var result = _cardService.Add(card);
@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost]
+        [HttpPost("delete")]
         public IActionResult Delete(Card card)
         {
             var result = _cardService.Delete(card);
@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
 
         }
-        [HttpPost]
+        [HttpPost("update")]
         public IActionResult Update(Card card)
         {
             var result = _cardService.Update(card);
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet]
+        [HttpGet("getall")]
         public IActionResult GetAll()
         {
             var result = _cardService.GetAllCards();
@@ -57,7 +57,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet]
+        [HttpGet("getbycustomerid")]
         public IActionResult GetByCustomerId(int id)
         {
             var result = _cardService.GetByCustomerId(id);
@@ -69,7 +69,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("getbycardnumber")]
         public IActionResult GetByCardNumber(string cardNumber)
         {
             var result = _cardService.GetbyCardNumber(cardNumber);
@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet]
+        [HttpGet("getlistbycustomerid")]
         public IActionResult GetListByCustomerId(int customerId)
         {
             var result = _cardService.GetCardListByCustomerId(customerId);

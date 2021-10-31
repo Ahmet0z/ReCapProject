@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PaymentsController : ControllerBase
     {
@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
             _paymentService = paymentService;
         }
 
-        [HttpPost]
+        [HttpPost("add")]
         public IActionResult Add(Payment payment)
         {
             var result = _paymentService.Add(payment);
