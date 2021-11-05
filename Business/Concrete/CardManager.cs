@@ -5,6 +5,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System.Collections.Generic;
+using Business.BusinessAspects.Autofac;
 
 namespace Business.Concrete
 {
@@ -17,6 +18,7 @@ namespace Business.Concrete
             _cardDal = cardDal;
             _customerService = customerService;
         }
+
         public IResult Add(Card card)
         {
             var result = BusinessRules.Run(CheckIsCreditCardExist(card.CreditCardNumber, card.ExpirationDate, card.SecurityCode));
@@ -39,6 +41,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Card>>(_cardDal.GetAll(), Messages.CardListed);
         }
 
+
         public IDataResult<Card> GetByCustomerId(int customerId)
         {
             var result = BusinessRules.Run(IsCustomerExist(customerId));
@@ -49,6 +52,7 @@ namespace Business.Concrete
 
             return new SuccessDataResult<Card>(_cardDal.Get(c => c.CustomerId == customerId));
         }
+
 
         public IDataResult<List<Card>> GetCardListByCustomerId(int customerId)
         {
@@ -66,6 +70,7 @@ namespace Business.Concrete
             _cardDal.Update(card);
             return new SuccessResult(Messages.CardUpdated);
         }
+
         public IDataResult<Card> GetbyCardNumber(string cardNumber)
         {
             var getCardNumber = _cardDal.Get(u => u.CreditCardNumber == cardNumber);

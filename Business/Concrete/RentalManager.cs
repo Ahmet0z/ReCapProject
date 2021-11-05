@@ -9,6 +9,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using Business.BusinessAspects.Autofac;
 
 namespace Business.Concrete
 {
@@ -22,6 +23,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(RentalValidator))]
+        [CacheRemoveAspect("IRentalService.get")]
         public IResult Add(Rental rental)
         {
             var rentalCar = _rentalDal.GetAll().FindLast(r => r.CarId == rental.CarId);
@@ -36,6 +38,8 @@ namespace Business.Concrete
 
         }
 
+        [SecuredOperation("admin")]
+        [CacheRemoveAspect("IRentalService.get")]
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
@@ -53,6 +57,8 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(), Messages.RentalDetailsListed);
         }
 
+        [SecuredOperation("admin")]
+        [CacheRemoveAspect("IRentalService.get")]
         public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);

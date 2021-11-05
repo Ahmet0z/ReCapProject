@@ -27,7 +27,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("ICarService.get")]
-        //[SecuredOperation("car.add,admin")]
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -41,7 +41,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("ICarService.get")]
-        [SecuredOperation("car.update,admin")]
+        [SecuredOperation("admin")]
         public IResult Update(Car car)
         {
             _carDal.Update(car);
@@ -49,7 +49,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("ICarService.get")]
-        [SecuredOperation("car.delete,admin")]
+        [SecuredOperation("admin")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
@@ -61,7 +61,6 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id),Messages.CarsListed);
         }
 
-        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarsListed);
@@ -90,6 +89,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == colorId), Messages.CarDetailBrought);
         }
 
+        [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandAndColor(int brandId, int colorId)
         {
             var result = BusinessRules.Run(IsColorExists(colorId), IsBrandExists(brandId));

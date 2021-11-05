@@ -7,6 +7,8 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System.Collections.Generic;
+using Business.BusinessAspects.Autofac;
+using Core.Aspects.Autofac.Caching;
 
 namespace Business.Concrete
 {
@@ -20,18 +22,23 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(ColorValidator))]
+        [SecuredOperation("admin")]
+        [CacheRemoveAspect("IColorService.get")]
         public IResult Add(Color color)
         {
            _colorDal.Add(color); ;
             return new SuccessResult(Messages.ColorAdded);
         }
 
+        [SecuredOperation("admin")]
+        [CacheRemoveAspect("IColorService.get")]
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
             return new SuccessResult(Messages.ColorDeleted);
         }
 
+        [CacheAspect()]
         public IDataResult<List<Color>> GetAll()
         {
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll(),Messages.ColorsListed);
@@ -47,6 +54,8 @@ namespace Business.Concrete
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == colorId));
         }
 
+        [SecuredOperation("admin")]
+        [CacheRemoveAspect("IColorService.get")]
         public IResult Update(Color color)
         {
             _colorDal.Update(color);

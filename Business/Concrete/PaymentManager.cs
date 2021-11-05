@@ -3,6 +3,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System.Collections.Generic;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core.Utilities.Business;
 
@@ -35,6 +36,7 @@ namespace Business.Concrete
                 return new SuccessResult();
             }
 
+            [SecuredOperation("admin")]
             public IResult Delete(Payment payment)
             {
                 _paymentDal.Delete(payment);
@@ -51,6 +53,7 @@ namespace Business.Concrete
                 return new SuccessDataResult<List<Payment>>(_paymentDal.GetAll());
             }
 
+
             public IDataResult<Payment> GetByPaymentId(int paymentId)
             {
                 var result = _paymentDal.Get(x => x.PaymentId == paymentId);
@@ -62,6 +65,7 @@ namespace Business.Concrete
                 return new SuccessDataResult<Payment>(result);
             }
 
+            [SecuredOperation("admin")]
             public IResult Update(Payment payment)
             {
                 _paymentDal.Update(payment);

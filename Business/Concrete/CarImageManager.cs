@@ -50,6 +50,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarImageValidator))]
         [CacheRemoveAspect("ICarImageService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
+        [SecuredOperation("admin")]
         public IResult Add(Image image, CarImage carImage)
         {
 
@@ -71,7 +72,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ImageAdded);
         }
 
-        [SecuredOperation("admin,carimage.all,carimage.update")]
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         [CacheRemoveAspect("ICarImageService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
@@ -96,7 +97,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ImageUpdated);
         }
 
-        [SecuredOperation("admin,carimage.all,carimage.delete")]
+        [SecuredOperation("admin")]
         [CacheRemoveAspect("ICarImageService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(CarImage carImage)
@@ -117,7 +118,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ImageDeleted);
         }
 
-        [SecuredOperation("admin,carimage.all,carimage.delete")]
+        [SecuredOperation("admin,")]
         [CacheRemoveAspect("ICarImageService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult DeleteAllImagesOfCarByCarId(int carId)
