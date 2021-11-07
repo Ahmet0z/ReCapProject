@@ -102,6 +102,12 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == colorId && c.BrandId == brandId));
         }
 
+        public IDataResult<int> GetCarFindeks(int carId)
+        {
+            var result = _carDal.Get(c => c.Id == carId);
+            return new SuccessDataResult<int>(result.Findeks);
+        }
+
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id),Messages.CarsListed);
@@ -111,6 +117,8 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id),Messages.CarsListed);
         }
+         
+        //Business Codes
 
         private IResult IsBrandExists(int brandId)
         {
@@ -131,5 +139,6 @@ namespace Business.Concrete
             }
             return new ErrorResult();
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Core.DataAccess.EntityFramework;
+﻿using System;
+using Core.DataAccess.EntityFramework;
 using Core.Entities.Concrete;
 using DataAccess.Abstract;
 using System.Collections.Generic;
@@ -37,5 +38,18 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
+        public void AddFindeks(int userId, int findeks)
+        {
+            using (ReCapContext context = new ReCapContext())
+            {
+                var userFindeks = from u in context.Users
+                    select u;
+
+                foreach (var user in userFindeks)
+                {
+                    user.Findeks += findeks%51;
+                }
+            }
+        }
     }
 }

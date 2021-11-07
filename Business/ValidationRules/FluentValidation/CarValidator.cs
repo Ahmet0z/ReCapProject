@@ -15,6 +15,17 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(c => c.Description).NotEmpty();
             RuleFor(c => c.BrandId).NotEmpty();
             RuleFor(c => c.ModelYear).NotEmpty();
+            RuleFor(c => c.Findeks).Must(IsMultipleOf50).WithMessage("Findeks değeri 50'nin katı olmalıdır.");
+        }
+
+        private bool IsMultipleOf50(int arg)
+        {
+            if (arg%50==0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

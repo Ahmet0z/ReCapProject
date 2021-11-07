@@ -50,7 +50,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarImageValidator))]
         [CacheRemoveAspect("ICarImageService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public IResult Add(Image image, CarImage carImage)
         {
 

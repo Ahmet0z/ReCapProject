@@ -80,6 +80,18 @@ namespace Business.Concrete
             return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaimsByUserId(userId));
         }
 
+        public IDataResult<int> GetUserFindeks(int userId)
+        {
+            var result = _userDal.Get(u => u.Id == userId);
+            return new SuccessDataResult<int>(result.Findeks);
+        }
+
+        public IResult AddFindeks(int userId, int findeks)
+        {
+            _userDal.AddFindeks(userId, findeks);
+            return new SuccessResult();
+        }
+
         public IResult Update(User user)
         {
             _userDal.Update(user);

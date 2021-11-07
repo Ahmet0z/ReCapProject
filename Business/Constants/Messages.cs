@@ -46,6 +46,7 @@
         public static string RentalUpdated = "Kiralama bilgisi güncellendi";
         public static string RentalsListed = "Kiralama bilgileri Listelendi";
         public static string RentalDetailsListed = "Kiralama Detayları Listelendi";
+        public static string RentalCouldntAdded = "Kiralama başarısız";
         public static string CarIsOnRent = "Araç şuan bir başkası tarafından kiralanmıştır";
 
         public static string ImageAdded = "Resim eklendi";
@@ -71,5 +72,6 @@
         public static string cardNotFound = "Böyle bir kart bulunamadı.";
 
         public static string PasswordChanged = "Şifre değiştirildi.";
+        
     }
 }

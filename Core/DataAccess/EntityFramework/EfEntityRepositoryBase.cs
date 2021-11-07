@@ -29,11 +29,6 @@ namespace Core.DataAccess.EntityFramework
                 deletedEntity.State = EntityState.Deleted;
                 context.SaveChanges();
 
-                /*
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
-                context.SaveChanges();
-                */
             }
         }
 
@@ -41,6 +36,8 @@ namespace Core.DataAccess.EntityFramework
         {
             using (TContext context = new TContext())
             {
+                
+                
                 return context.Set<TEntity>().SingleOrDefault(filter);
             }
         }

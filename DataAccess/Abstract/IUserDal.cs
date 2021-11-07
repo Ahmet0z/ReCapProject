@@ -9,5 +9,6 @@ namespace DataAccess.Abstract
     {
         List<OperationClaim> GetClaims(User user);
         List<OperationClaim> GetClaimsByUserId(int userId);
+        void AddFindeks(int userId,int findeks);
     }
 }

@@ -19,7 +19,7 @@ namespace DataAccess.Concrete.EntityFramework
                     join c in context.Customers
                         on u.Id equals c.UserId
                     join r in context.Rentals
-                        on c.CustomerId equals r.CustomerId
+                        on u.Id equals r.UserId
                     join cr in context.Cars
                         on r.CarId equals cr.Id
                     select new CustomerDetailDto
@@ -29,7 +29,7 @@ namespace DataAccess.Concrete.EntityFramework
                         CarId = cr.Id,
                         CustomerName = u.FirstName + " " + u.LastName,
                         CompanyName = c.CompanyName,
-                        Findeks = c.Findeks
+                        Findeks = u.Findeks
 
                     };
                 return filter == null ? customerDetails.ToList() : customerDetails.Where(filter).ToList();
