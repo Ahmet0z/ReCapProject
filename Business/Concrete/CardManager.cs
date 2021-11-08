@@ -12,17 +12,18 @@ namespace Business.Concrete
     public class CardManager:ICardService
     {
         ICardDal _cardDal;
-        private ICustomerService _customerService;
-        public CardManager(ICardDal cardDal, ICustomerService customerService)
+        private IUserService _userService;
+        public CardManager(ICardDal cardDal, IUserService userService)
         {
             _cardDal = cardDal;
-            _customerService = customerService;
+            _userService = userService;
         }
 
         public IResult Add(Card card)
         {
             var result = BusinessRules.Run(CheckIsCreditCardExist(card.CreditCardNumber, card.ExpirationDate, card.SecurityCode));
-            if (result == null)
+
+            if (result != null)
             {
                 return new ErrorResult();
             }
@@ -42,26 +43,26 @@ namespace Business.Concrete
         }
 
 
-        public IDataResult<Card> GetByCustomerId(int customerId)
+        public IDataResult<Card> GetByCustomerId(int userId)
         {
-            var result = BusinessRules.Run(IsCustomerExist(customerId));
+            var result = BusinessRules.Run(IsCustomerExist(userId));
             if (result == null)
             {
                 return new ErrorDataResult<Card>();
             }
 
-            return new SuccessDataResult<Card>(_cardDal.Get(c => c.CustomerId == customerId));
+            return new SuccessDataResult<Card>(_cardDal.Get(c => c.UserId == userId));
         }
 
 
-        public IDataResult<List<Card>> GetCardListByCustomerId(int customerId)
+        public IDataResult<List<Card>> GetCardListByCustomerId(int userId)
         {
-            var result = BusinessRules.Run(IsCustomerExist(customerId));
+            var result = BusinessRules.Run(IsCustomerExist(userId));
             if (result != null)
             {
                 return new ErrorDataResult<List<Card>>();
             }
-            return new SuccessDataResult<List<Card>>(_cardDal.GetAll(x => x.CustomerId == customerId));
+            return new SuccessDataResult<List<Card>>(_cardDal.GetAll(x => x.UserId == userId));
 
         }
 
@@ -77,21 +78,26 @@ namespace Business.Concrete
             return new SuccessDataResult<Card>(getCardNumber);
         }
 
+        //Business Rules
+
         private IResult CheckIsCreditCardExist(string cardNumber, string expirationDate, string securityCode)
         {
-            var result = _cardDal.Get(x =>
-                x.CreditCardNumber == cardNumber && x.ExpirationDate == expirationDate &&
-                x.SecurityCode == securityCode);
-            if (result==null)
+            var result = _cardDal.Get(c =>
+                c.CreditCardNumber == cardNumber && c.ExpirationDate == expirationDate &&
+                c.SecurityCode == securityCode);
+
+            if (result!=null)
             {
-                return new SuccessResult();
+                return new ErrorResult("Kredi Kartı Mevcut");
+
             }
-            return new ErrorResult("Kredi Kartı Mevcut");
+            return new SuccessResult();
+
         }
 
-        private IResult IsCustomerExist(int customerId)
+        private IResult IsCustomerExist(int userId)
         {
-            var result = _customerService.Get(customerId);
+            var result = _userService.GetByUserId(userId);
             if (result == null)
             {
                 return new ErrorResult();

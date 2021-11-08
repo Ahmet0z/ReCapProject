@@ -31,13 +31,8 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            if (car.CarName.Length>=2 && car.DailyPrice>0)
-            {
-                _carDal.Add(car);
-                return new SuccessResult(Messages.CarAdded);
-            }
-
-            return new ErrorResult(Messages.CarNameInvalid);
+            _carDal.Add(car);
+            return new SuccessResult(Messages.CarAdded);
         }
 
         [CacheRemoveAspect("ICarService.get")]
@@ -99,7 +94,7 @@ namespace Business.Concrete
             }
 
 
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == colorId && c.BrandId == brandId));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == brandId && c.ColorId == colorId));
         }
 
         public IDataResult<int> GetCarFindeks(int carId)
