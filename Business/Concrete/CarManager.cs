@@ -39,6 +39,11 @@ namespace Business.Concrete
         [SecuredOperation("admin")]
         public IResult Update(Car car)
         {
+            var result = BusinessRules.Run(IsCarExist(car.Id));
+            if (result != null)
+            {
+                return new ErrorResult(Messages.CarNotFound);
+            }
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
         }
@@ -132,6 +137,17 @@ namespace Business.Concrete
             {
                 return new SuccessResult();
             }
+            return new ErrorResult();
+        }
+
+        private IResult IsCarExist(int carId)
+        {
+            var result = _carDal.Get(c => c.Id == carId);
+            if (result != null)
+            {
+                return new SuccessResult();
+            }
+
             return new ErrorResult();
         }
 
