@@ -1,26 +1,27 @@
 <h2>Backend Tecnologies</h2>
+<ul>
+  <li>Asp.Net Core for Restful api</li>
 
-Asp.Net Core for Restful api
+  <li>EntityFramework Core</li>
 
-EntityFramework Core
+  <li>Autofac</li>
 
-Autofac
-
-FluentValidation
-
+  <li>FluentValidation</li>
+</ul>
 <h2>Backend Techniques</h2>
+<ul>
+  <li>Layered Architecture Design Pattern</li>
 
-Layered Architecture Design Pattern
+  <li>AOP</li>
 
-AOP
+  <li>JWT</li>
 
-JWT
+  <li>Autofac dependency resolver</li>
 
-Autofac dependency resolver
+  <li>IOC</li>
 
-IOC
+  <li>Aspects</li>
 
-Aspects
-
-File upload
+  <li>File upload</li>
+  </ul>
 
