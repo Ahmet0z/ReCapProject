@@ -1,3 +1,5 @@
+This project is an online car rental project for <a href="https://www.kodlama.io/" target="_blank">kodlama.io</a> online course program of Engin Demirog.
+
 <h2>Backend Tecnologies</h2>
 <ul>
   <li>Asp.Net Core for Restful api</li>
