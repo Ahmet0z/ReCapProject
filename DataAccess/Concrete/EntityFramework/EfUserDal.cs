@@ -42,13 +42,9 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (ReCapContext context = new ReCapContext())
             {
-                var userFindeks = from u in context.Users
-                    select u;
-
-                foreach (var user in userFindeks)
-                {
-                    user.Findeks += findeks%51;
-                }
+                var updatedUser = Get(u => u.Id == userId);
+                updatedUser.Findeks = updatedUser.Findeks + findeks/10;
+                Update(updatedUser);
             }
         }
     }
