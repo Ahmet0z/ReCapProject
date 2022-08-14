@@ -6,6 +6,8 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System.Collections.Generic;
 using Business.BusinessAspects.Autofac;
+using Core.Aspects.Autofac.Validation;
+using Business.ValidationRules.FluentValidation;
 
 namespace Business.Concrete
 {
@@ -19,6 +21,7 @@ namespace Business.Concrete
             _userService = userService;
         }
 
+        [ValidationAspect(typeof(CardValidator))]
         public IResult Add(Card card)
         {
             var result = BusinessRules.Run(CheckIsCreditCardExist(card.CreditCardNumber, card.ExpirationDate, card.SecurityCode));

@@ -22,7 +22,7 @@
         public static string ColorUpdated = "Renk güncellendi";
         public static string ColorsListed = "Renkler Listelendi";
         public static string ColorNotFound = "Renk bulunamadı";
-
+        public static string ColorAlreadyUse = "Bu renk zaten var.";
 
         public static string UserAdded = "Kullanıcı eklendi";
         public static string UserDeleted = "Kullanıcı silindi";
@@ -58,8 +58,7 @@
         public static string NoPictureOfTheCar = "Arabanın resmi bulunmamaktadır.";
         public static string ErrorDeletingImage = "Resim kaldırma başarısız.";
         public static string ErrorUpdatingImage = "Resim güncelleme başarısız.";
-        public static string GetDefaultImage = "Default resin getirildi.";
-
+        public static string GetDefaultImage = "Varsayılan resin getirildi.";
 
         public static string ClaimsListed = "Roller Listelendi";
 
@@ -72,6 +71,6 @@
         public static string cardNotFound = "Böyle bir kart bulunamadı.";
 
         public static string PasswordChanged = "Şifre değiştirildi.";
-        
+
     }
 }

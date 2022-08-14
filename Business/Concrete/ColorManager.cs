@@ -26,7 +26,13 @@ namespace Business.Concrete
         [CacheRemoveAspect("IColorService.get")]
         public IResult Add(Color color)
         {
-           _colorDal.Add(color); ;
+            var result = BusinessRules.Run(CheckIfColorNameExist(color.ColorName));
+            if (result != null)
+            {
+                return new ErrorResult(Messages.ColorAlreadyUse);
+            }
+
+            _colorDal.Add(color); ;
             return new SuccessResult(Messages.ColorAdded);
         }
 
@@ -41,7 +47,7 @@ namespace Business.Concrete
         [CacheAspect()]
         public IDataResult<List<Color>> GetAll()
         {
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(),Messages.ColorsListed);
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.ColorsListed);
         }
 
         public IDataResult<Color> GetById(int colorId)
@@ -58,6 +64,11 @@ namespace Business.Concrete
         [CacheRemoveAspect("IColorService.get")]
         public IResult Update(Color color)
         {
+            var result = BusinessRules.Run(CheckIfColorExist(color.ColorId));
+            if (result != null)
+            {
+                return new ErrorDataResult<Color>(Messages.ColorNotFound);
+            }
             _colorDal.Update(color);
             return new SuccessResult(Messages.ColorUpdated);
         }
@@ -70,6 +81,16 @@ namespace Business.Concrete
                 return new ErrorDataResult<int>();
             }
             return new SuccessDataResult<int>(colorId);
+        }
+
+        private IDataResult<string> CheckIfColorNameExist(string colorName)
+        {
+            var result = _colorDal.GetByColorName(colorName);
+            if (result == null)
+            {
+                return new ErrorDataResult<string>(Messages.ColorNotFound);
+            }
+            return new SuccessDataResult<string>(result.ColorName);
         }
     }
 }
