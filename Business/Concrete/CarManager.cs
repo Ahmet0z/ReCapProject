@@ -58,12 +58,12 @@ namespace Business.Concrete
 
         public IDataResult<Car> GetByCarId(int id)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id),Messages.CarsListed);
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id), Messages.CarsListed);
         }
 
         public IDataResult<List<Car>> GetAll()
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarsListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
 
         [CacheAspect]
@@ -110,14 +110,14 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id),Messages.CarsListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id), Messages.CarsListed);
         }
 
         public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id),Messages.CarsListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id), Messages.CarsListed);
         }
-         
+
         //Business Codes
 
         private IResult IsBrandExists(int brandId)

@@ -8,7 +8,7 @@ using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class RegisterValidator:AbstractValidator<UserForRegisterDto>
+    public class RegisterValidator : AbstractValidator<UserForRegisterDto>
     {
         public RegisterValidator()
         {

@@ -15,7 +15,7 @@
         public static string CarNameInvalid = "Araç ismi geçersiz";
         public static string CarDetailBrought = "Araç detayı getirildi";
         public static string CarNotFound = "Araç bulunamadı.";
-        public static string CarsCouldntListed ="Araçlar listelenemedi.";
+        public static string CarsCouldntListed = "Araçlar listelenemedi.";
 
         public static string ColorAdded = "Renk eklendi";
         public static string ColorDeleted = "Renk silindi";

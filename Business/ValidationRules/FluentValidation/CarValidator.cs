@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class CarValidator: AbstractValidator<Car>
+    public class CarValidator : AbstractValidator<Car>
     {
         public CarValidator()
         {
@@ -20,7 +20,7 @@ namespace Business.ValidationRules.FluentValidation
 
         private bool IsMultipleOf50(int arg)
         {
-            if (arg%50==0)
+            if (arg % 50 == 0)
             {
                 return true;
             }

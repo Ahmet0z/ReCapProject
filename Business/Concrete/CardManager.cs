@@ -11,7 +11,7 @@ using Business.ValidationRules.FluentValidation;
 
 namespace Business.Concrete
 {
-    public class CardManager:ICardService
+    public class CardManager : ICardService
     {
         ICardDal _cardDal;
         private IUserService _userService;
@@ -89,7 +89,7 @@ namespace Business.Concrete
                 c.CreditCardNumber == cardNumber && c.ExpirationDate == expirationDate &&
                 c.SecurityCode == securityCode);
 
-            if (result!=null)
+            if (result != null)
             {
                 return new ErrorResult("Kredi Kartı Mevcut");
 

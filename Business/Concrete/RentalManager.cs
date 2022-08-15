@@ -100,7 +100,7 @@ namespace Business.Concrete
         {
             int userFindeks = _userService.GetUserFindeks(userId).Data;
 
-            if (userFindeks<1900)
+            if (userFindeks < 1900)
             {
                 _userService.AddFindeks(userId, findeks);
             }

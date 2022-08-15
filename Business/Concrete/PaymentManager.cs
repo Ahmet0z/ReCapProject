@@ -27,7 +27,7 @@ namespace Business.Concrete
             {
                 var result = BusinessRules.Run(CheckCardExist(payment.CreditCardNumber, payment.ExpirationDate,
                     payment.SecurityCode));
-                if (result!=null)
+                if (result != null)
                 {
                     return new ErrorResult();
                 }
@@ -76,7 +76,7 @@ namespace Business.Concrete
             private IResult CheckCardExist(string cardNumber, string expiration, string securityCode)
             {
                 var result = _cardService.GetbyCardNumber(cardNumber);
-                if (result.Data.ExpirationDate == expiration && result.Data.SecurityCode ==securityCode)
+                if (result.Data.ExpirationDate == expiration && result.Data.SecurityCode == securityCode)
                 {
                     return new SuccessResult();
                 }

@@ -43,7 +43,7 @@ namespace Business.Concrete
 
         public IDataResult<User> GetByUserId(int userId)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId),Messages.UserGetted);
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId), Messages.UserGetted);
         }
 
         public IResult ChangeUserPassword(ChangePasswordDto changePasswordDto)
