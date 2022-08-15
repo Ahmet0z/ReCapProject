@@ -19,13 +19,14 @@ namespace Business.Concrete
     public class CarImageManager : ICarImageService
     {
         private readonly ICarImageDal _carImageDal;
+        private readonly ICarDal _carDal;
 
-        public CarImageManager(ICarImageDal carImageDal)
+        public CarImageManager(ICarImageDal carImageDal, ICarDal carDal)
         {
             _carImageDal = carImageDal;
+            _carDal = carDal;
         }
 
-        [CacheAspect(10)]
         public IDataResult<List<CarImage>> GetAll()
         {
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(), Messages.ImagessListed);
@@ -41,12 +42,12 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(images, checkIfCarImage.Message);
         }
 
-        [CacheAspect(10)]
         public IDataResult<CarImage> GetById(int imageId)
         {
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == imageId), Messages.ImagessListed);
         }
 
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         [CacheRemoveAspect("ICarImageService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
@@ -118,7 +119,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ImageDeleted);
         }
 
-        [SecuredOperation("admin,")]
+        [SecuredOperation("admin")]
         [CacheRemoveAspect("ICarImageService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult DeleteAllImagesOfCarByCarId(int carId)
@@ -168,12 +169,12 @@ namespace Business.Concrete
             return new ErrorDataResult<List<CarImage>>(new List<CarImage>(), Messages.ImagessListed);
         }
 
-        private IResult CheckIfCarIdExist(int imageId)
+        private IResult CheckIfCarIdExist(int carId)
         {
-            var result = _carImageDal.GetAll(c => c.Id == imageId).Any();
-            if (!result)
+            var result = _carDal.Get(c => c.Id == carId);
+            if (result == null)
             {
-                return new ErrorResult(Messages.NotFoundImage);
+                return new ErrorResult(Messages.CarNotFound);
             }
             return new SuccessResult();
         }
