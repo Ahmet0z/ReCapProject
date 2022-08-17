@@ -29,6 +29,8 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(RentalValidator))]
         [CacheRemoveAspect("IRentalService.get")]
+        [CacheRemoveAspect("ICarService.get")]
+
         public IResult Add(Rental rental)
         {
             var result = BusinessRules.Run(IsFindexEnough(rental));
