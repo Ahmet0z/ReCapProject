@@ -12,13 +12,10 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, ReCapContext>, ICarDal
     {
-
         public List<CarDetailDto> GetCarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
         {
-
             using (ReCapContext context = new ReCapContext())
             {
-
                 var result = from c in context.Cars
                              join b in context.Brands
                                  on c.BrandId equals b.BrandId
@@ -43,6 +40,5 @@ namespace DataAccess.Concrete.EntityFramework
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
-
     }
 }

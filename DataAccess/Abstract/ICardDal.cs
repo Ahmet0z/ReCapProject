@@ -3,7 +3,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
-    public interface ICardDal:IEntityRepository<Card>
+    public interface ICardDal : IEntityRepository<Card>
     {
     }
 }

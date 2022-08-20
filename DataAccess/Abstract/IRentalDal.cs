@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DataAccess.Abstract
 {
-    public interface IRentalDal:IEntityRepository<Rental>
+    public interface IRentalDal : IEntityRepository<Rental>
     {
         List<RentalDetailDto> GetRentalDetails();
     }

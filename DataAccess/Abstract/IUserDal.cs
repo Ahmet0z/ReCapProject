@@ -5,10 +5,10 @@ using Entities.DTOs;
 
 namespace DataAccess.Abstract
 {
-    public interface IUserDal:IEntityRepository<User>
+    public interface IUserDal : IEntityRepository<User>
     {
         List<OperationClaim> GetClaims(User user);
         List<OperationClaim> GetClaimsByUserId(int userId);
-        void AddFindeks(int userId,int findeks);
+        void AddFindeks(int userId, int findeks);
     }
 }

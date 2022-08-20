@@ -30,7 +30,6 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         [CacheRemoveAspect("IRentalService.get")]
         [CacheRemoveAspect("ICarService.get")]
-
         public IResult Add(Rental rental)
         {
             var result = BusinessRules.Run(IsFindexEnough(rental));
@@ -50,8 +49,6 @@ namespace Business.Concrete
                 return new SuccessResult(Messages.RentalAdded);
             }
             return new ErrorResult(Messages.CarIsOnRent);
-
-
         }
 
         [SecuredOperation("admin")]
@@ -95,7 +92,6 @@ namespace Business.Concrete
                 return new SuccessResult();
             }
             return new ErrorResult();
-
         }
 
         private void AddFindeksToUser(int userId, int findeks)

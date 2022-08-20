@@ -98,7 +98,6 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.CarsCouldntListed);
             }
 
-
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == brandId && c.ColorId == colorId));
         }
 
@@ -147,7 +146,6 @@ namespace Business.Concrete
             {
                 return new SuccessResult();
             }
-
             return new ErrorResult();
         }
 

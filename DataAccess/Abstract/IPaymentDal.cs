@@ -3,7 +3,7 @@ using Core.DataAccess;
 
 namespace DataAccess.Abstract
 {
-    public interface IPaymentDal:IEntityRepository<Payment>
+    public interface IPaymentDal : IEntityRepository<Payment>
     {
     }
 }
