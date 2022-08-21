@@ -2,7 +2,7 @@
 
 namespace Entities.Concrete
 {
-    public class Payment:IEntity
+    public class Payment : IEntity
     {
         public int PaymentId { get; set; }
         public int CustomerId { get; set; }

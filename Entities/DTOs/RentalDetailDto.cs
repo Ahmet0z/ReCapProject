@@ -3,7 +3,7 @@ using System;
 
 namespace Entities.DTOs
 {
-    public class RentalDetailDto:IDto
+    public class RentalDetailDto : IDto
     {
         public int Id { get; set; }
         public string CarName { get; set; }

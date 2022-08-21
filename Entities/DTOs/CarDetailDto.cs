@@ -1,9 +1,8 @@
-﻿using Castle.DynamicProxy.Generators.Emitters;
-using Core.Entities;
+﻿using Core.Entities;
 
 namespace Entities.DTOs
 {
-    public class CarDetailDto:IDto
+    public class CarDetailDto : IDto
     {
         public int Id { get; set; }
         public int BrandId { get; set; }

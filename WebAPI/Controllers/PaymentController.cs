@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update( Payment payment)
+        public IActionResult Update(Payment payment)
         {
             var result = _paymentService.Update(payment);
             if (result.Success)
@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("delete")]
-        public IActionResult Delete( Payment payment)
+        public IActionResult Delete(Payment payment)
         {
             var result = _paymentService.Delete(payment);
             if (result.Success)
@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("get")]
-        public IActionResult Get( Payment payment)
+        public IActionResult Get(Payment payment)
         {
             var result = _paymentService.Get(payment);
             if (result.Success)
