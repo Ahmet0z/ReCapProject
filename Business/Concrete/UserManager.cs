@@ -49,18 +49,22 @@ namespace Business.Concrete
         public IResult ChangeUserPassword(ChangePasswordDto changePasswordDto)
         {
             byte[] passwordHash, passwordSalt;
+
             var userToCheck = GetByMail(changePasswordDto.Email);
             if (userToCheck.Data == null)
             {
                 return new ErrorResult(Messages.UserNotFound);
             }
+
             if (!HashingHelper.VerifyPasswordHash(changePasswordDto.OldPassword, userToCheck.Data.PasswordHash, userToCheck.Data.PasswordSalt))
             {
                 return new ErrorResult(Messages.PasswordError);
             }
+
             HashingHelper.CreatePasswordHash(changePasswordDto.NewPassword, out passwordHash, out passwordSalt);
             userToCheck.Data.PasswordHash = passwordHash;
             userToCheck.Data.PasswordSalt = passwordSalt;
+
             _userDal.Update(userToCheck.Data);
             return new SuccessResult(Messages.PasswordChanged);
         }
@@ -92,9 +96,15 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IResult Update(User user)
+        public IResult Update(UserUpdateDto user)
         {
-            _userDal.Update(user);
+            var userToUpdate = GetByMail(user.Email);
+
+            userToUpdate.Data.Email = user.Email;
+            userToUpdate.Data.FirstName = user.FirstName;
+            userToUpdate.Data.LastName = user.LastName;
+
+            _userDal.Update(userToUpdate.Data);
             return new SuccessResult(Messages.UserUpdated);
         }
     }

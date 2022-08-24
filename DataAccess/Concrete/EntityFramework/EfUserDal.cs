@@ -5,6 +5,8 @@ using DataAccess.Abstract;
 using System.Collections.Generic;
 using System.Linq;
 using Entities.DTOs;
+using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {

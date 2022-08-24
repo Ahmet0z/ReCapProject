@@ -9,7 +9,7 @@ namespace Business.Abstract
     {
         IResult Add(User user);
         IResult Delete(User user);
-        IResult Update(User user);
+        IResult Update(UserUpdateDto user);
         IResult ChangeUserPassword(ChangePasswordDto changePasswordDto);
         IDataResult<User> GetByMail(string email);
         IDataResult<List<User>> GetAll();

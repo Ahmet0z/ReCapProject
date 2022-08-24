@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(User user)
+        public IActionResult Update(UserUpdateDto user)
         {
             var result = _userService.Update(user);
             if (result.Success)
