@@ -33,7 +33,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect(10)]
-        public IDataResult<List<CarImage>> GetCarImagesById(int carId)
+        public IDataResult<List<CarImage>> GetCarImagesByCarId(int carId)
         {
             var checkIfCarImage = CheckIfCarHasImage(carId);
             var images = checkIfCarImage.Success
@@ -51,15 +51,12 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarImageValidator))]
         [CacheRemoveAspect("ICarImageService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
-        //[SecuredOperation("admin")]
         public IResult Add(Image image, CarImage carImage)
         {
-
-            var imageCount = _carImageDal.GetAll(c => c.CarId == carImage.CarId).Count;
-
-            if (imageCount >= 5)
+            IResult rulesResult = BusinessRules.Run(CheckIfCarImageLimitExceeded(carImage.CarId));
+            if (rulesResult != null)
             {
-                return new ErrorResult(Messages.CarImageLimitExceded);
+                return rulesResult;
             }
 
             var imageResult = FileHelper.Upload(image.File);
@@ -103,7 +100,7 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(CarImage carImage)
         {
-            IResult rulesResult = BusinessRules.Run(CheckIfCarIdExist(carImage.Id));
+            IResult rulesResult = BusinessRules.Run(CheckIfCarIdExist(carImage.CarId));
             if (rulesResult != null)
             {
                 return rulesResult;
