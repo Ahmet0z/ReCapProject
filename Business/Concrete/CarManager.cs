@@ -117,7 +117,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id), Messages.CarsListed);
         }
 
-        //Business Codes
+        //Business Rules
 
         private IResult IsBrandExists(int brandId)
         {

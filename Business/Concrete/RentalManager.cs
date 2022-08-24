@@ -32,23 +32,19 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICarService.get")]
         public IResult Add(Rental rental)
         {
-            var result = BusinessRules.Run(IsFindexEnough(rental));
+            var result = BusinessRules.Run(IsFindexEnough(rental), CheckIsCarRentable(rental.CarId));
 
             if (result != null)
             {
-                return new ErrorResult(Messages.RentalCouldntAdded);
+                return new ErrorResult(result.Message);
             }
 
-            var rentalCar = _rentalDal.GetAll().FindLast(r => r.CarId == rental.CarId);
+            Car car = GetCar(rental.CarId).Data;
+            AddFindeksToUser(rental.UserId, car.Findeks);
+            _rentalDal.Add(rental);
 
-            if (rentalCar == null || (rentalCar != null && rentalCar.ReturnDate != new DateTime()))
-            {
-                Car car = GetCar(rental.CarId).Data;
-                AddFindeksToUser(rental.UserId, car.Findeks);
-                _rentalDal.Add(rental);
-                return new SuccessResult(Messages.RentalAdded);
-            }
-            return new ErrorResult(Messages.CarIsOnRent);
+            return new SuccessResult(Messages.RentalAdded);
+
         }
 
         [SecuredOperation("admin")]
@@ -91,7 +87,7 @@ namespace Business.Concrete
             {
                 return new SuccessResult();
             }
-            return new ErrorResult();
+            return new ErrorResult(Messages.NotEnoughFindex);
         }
 
         private void AddFindeksToUser(int userId, int findeks)
@@ -112,6 +108,19 @@ namespace Business.Concrete
                 return new SuccessDataResult<Car>(result.Data);
             }
             return new ErrorDataResult<Car>(Messages.CarNotFound);
+        }
+
+        private IResult CheckIsCarRentable(int carId)
+        {
+            var rentalCar = _rentalDal.GetAll().FindLast(r => r.CarId == carId);
+
+            if (rentalCar == null || (rentalCar != null && rentalCar.ReturnDate != new DateTime()))
+            {
+
+                return new SuccessResult();
+            }
+
+            return new ErrorResult(Messages.CarIsOnRent);
         }
     }
 }

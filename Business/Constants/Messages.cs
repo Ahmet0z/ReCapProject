@@ -48,6 +48,7 @@
         public static string RentalDetailsListed = "Kiralama Detayları Listelendi";
         public static string RentalCouldntAdded = "Kiralama başarısız";
         public static string CarIsOnRent = "Araç şuan bir başkası tarafından kiralanmıştır";
+        public static string NotEnoughFindex = "Yetersiz Findeks puani.";
 
         public static string ImageAdded = "Resim eklendi";
         public static string ImageDeleted = "Resim silindi";

@@ -40,6 +40,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CardDeleted);
         }
 
+        [SecuredOperation("admin")]
         public IDataResult<List<Card>> GetAllCards()
         {
             return new SuccessDataResult<List<Card>>(_cardDal.GetAll(), Messages.CardListed);

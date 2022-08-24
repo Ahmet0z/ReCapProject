@@ -32,7 +32,6 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(), Messages.ImagessListed);
         }
 
-        [CacheAspect(10)]
         public IDataResult<List<CarImage>> GetCarImagesByCarId(int carId)
         {
             var checkIfCarImage = CheckIfCarHasImage(carId);
@@ -49,7 +48,6 @@ namespace Business.Concrete
 
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarImageValidator))]
-        [CacheRemoveAspect("ICarImageService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Image image, CarImage carImage)
         {
@@ -72,7 +70,6 @@ namespace Business.Concrete
 
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarImageValidator))]
-        [CacheRemoveAspect("ICarImageService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(CarImage carImage, Image image)
         {
@@ -96,7 +93,6 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("admin")]
-        [CacheRemoveAspect("ICarImageService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(CarImage carImage)
         {
@@ -117,7 +113,6 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("admin")]
-        [CacheRemoveAspect("ICarImageService.Get")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult DeleteAllImagesOfCarByCarId(int carId)
         {

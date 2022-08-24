@@ -48,12 +48,13 @@ namespace Business.Concrete
                 return new SuccessDataResult<Payment>(_paymentDal.Get(x => x.PaymentId == payment.PaymentId));
             }
 
+            [SecuredOperation("admin")]
             public IDataResult<List<Payment>> GetAll()
             {
                 return new SuccessDataResult<List<Payment>>(_paymentDal.GetAll());
             }
 
-
+            [SecuredOperation("admin")]
             public IDataResult<Payment> GetByPaymentId(int paymentId)
             {
                 var result = _paymentDal.Get(x => x.PaymentId == paymentId);
@@ -72,6 +73,7 @@ namespace Business.Concrete
                 return new SuccessResult();
             }
 
+            //Business Rules
 
             private IResult CheckCardExist(string cardNumber, string expiration, string securityCode)
             {
