@@ -18,5 +18,7 @@ namespace Business.Abstract
         IDataResult<List<OperationClaim>> GetClaimsById(int userId);
         IDataResult<int> GetUserFindeks(int userId);
         IResult AddFindeks(int userId, int findeks);
+        IResult AddUserOperationClaim(UserOperationClaim userOperationClaim);
+        IResult DeleteUserOperationClaim(UserOperationClaim userOperationClaim);
     }
 }

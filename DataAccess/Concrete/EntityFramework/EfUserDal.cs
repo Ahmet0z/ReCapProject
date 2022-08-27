@@ -7,6 +7,7 @@ using System.Linq;
 using Entities.DTOs;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -47,6 +48,42 @@ namespace DataAccess.Concrete.EntityFramework
                 var updatedUser = Get(u => u.Id == userId);
                 updatedUser.Findeks = updatedUser.Findeks + findeks / 10;
                 Update(updatedUser);
+            }
+        }
+
+        public void AddCLaim(UserOperationClaim userOperationClaim)
+        {
+            using (ReCapContext context = new ReCapContext())
+            {
+                var addedEntity = context.Entry(userOperationClaim);
+                addedEntity.State = EntityState.Added;
+                context.SaveChanges();
+            }
+        }
+
+        public void DeleteClaim(UserOperationClaim userOperationClaim)
+        {
+            using (ReCapContext context = new ReCapContext())
+            {
+                var deletedEntity = context.Entry(userOperationClaim);
+                deletedEntity.State = EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+
+        public OperationClaim GetOperationClaim(Expression<Func<OperationClaim, bool>> filter = null)
+        {
+            using(ReCapContext context = new ReCapContext())
+            {
+                return context.Set<OperationClaim>().SingleOrDefault(filter);
+            }
+        }
+
+        public UserOperationClaim GetUserOperationClaim(Expression<Func<UserOperationClaim, bool>> filter = null)
+        {
+            using (ReCapContext context = new ReCapContext())
+            {
+                return context.Set<UserOperationClaim>().SingleOrDefault(filter);
             }
         }
     }

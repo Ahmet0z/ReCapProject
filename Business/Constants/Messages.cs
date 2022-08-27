@@ -62,6 +62,8 @@
         public static string GetDefaultImage = "Varsayılan resin getirildi.";
 
         public static string ClaimsListed = "Roller Listelendi";
+        public static string ClaimAdded = "Yetki eklendi";
+        public static string ClaimDeleted = "Yetki Silindi";
 
         public static string PasswordError = "Şifre hatalı";
         public static string SuccessfulLogin = "Giriş başarılı";
@@ -72,6 +74,7 @@
         public static string cardNotFound = "Böyle bir kart bulunamadı.";
 
         public static string PasswordChanged = "Şifre değiştirildi.";
+
 
     }
 }

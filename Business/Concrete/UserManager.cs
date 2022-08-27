@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Business.BusinessAspects.Autofac;
 using Core.Utilities.Security.Hashing;
 using Entities.DTOs;
+using Core.Utilities.Business;
 
 namespace Business.Concrete
 {
@@ -106,6 +107,70 @@ namespace Business.Concrete
 
             _userDal.Update(userToUpdate.Data);
             return new SuccessResult(Messages.UserUpdated);
+        }
+
+        [SecuredOperation("admin")]
+        public IResult AddUserOperationClaim(UserOperationClaim userOperationClaim)
+        {
+            var result = BusinessRules.Run(IsClaimExist(userOperationClaim.OperationClaimId), IsUserExist(userOperationClaim.UserId));
+
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
+
+            _userDal.AddCLaim(userOperationClaim);
+            return new SuccessResult(Messages.ClaimAdded);
+        }
+
+        [SecuredOperation("admin")]
+        public IResult DeleteUserOperationClaim(UserOperationClaim userOperationClaim)
+        {
+            var result = BusinessRules.Run(IsUserHasClaim(userOperationClaim.UserId, userOperationClaim.OperationClaimId));
+
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
+
+            _userDal.DeleteClaim(userOperationClaim);
+            return new SuccessResult(Messages.ClaimDeleted);
+        }
+
+        //Business Rules
+
+        private IResult IsUserExist(int userId)
+        {
+            var user = _userDal.Get(u => u.Id == userId);
+            if (user != null)
+            {
+                return new SuccessResult();
+            }
+
+            return new ErrorResult();
+        }
+
+        private IResult IsClaimExist(int operationClaimId)
+        {
+            var claim = _userDal.GetOperationClaim(o => o.Id == operationClaimId);
+            if (claim != null)
+            {
+                return new SuccessResult();
+            }
+
+            return new ErrorResult();
+        }
+
+        private IResult IsUserHasClaim(int userId, int operationClaimId)
+        {
+            var result = _userDal.GetUserOperationClaim(uoc => uoc.UserId == userId && uoc.OperationClaimId == operationClaimId);
+
+            if (result != null)
+            {
+                return new SuccessResult();
+            }
+
+            return new ErrorResult();
         }
     }
 }

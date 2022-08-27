@@ -94,5 +94,31 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
+        [HttpPost("adduseroperationclaim")]
+        public IActionResult AddUserOperationClaim(UserOperationClaim userOperationClaim)
+        {
+            var result = _userService.AddUserOperationClaim(userOperationClaim);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpPost("deleteuseroperationclaim")]
+        public IActionResult DeleteuserClaim(UserOperationClaim userOperationClaim)
+        {
+            var result = _userService.DeleteUserOperationClaim(userOperationClaim);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
     }
 }
