@@ -11,6 +11,7 @@ namespace DataAccess.Abstract
     {
         List<OperationClaim> GetClaims(User user);
         List<OperationClaim> GetClaimsByUserId(int userId);
+        List<OperationClaim> GetAllClaims(Expression<Func<OperationClaim, bool>> filter = null);
         OperationClaim GetOperationClaim(Expression<Func<OperationClaim, bool>> filter = null);
         UserOperationClaim GetUserOperationClaim(Expression<Func<UserOperationClaim, bool>> filter = null);
         void AddCLaim(UserOperationClaim userOperationClaim);

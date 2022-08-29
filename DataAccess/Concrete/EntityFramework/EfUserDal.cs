@@ -86,5 +86,13 @@ namespace DataAccess.Concrete.EntityFramework
                 return context.Set<UserOperationClaim>().SingleOrDefault(filter);
             }
         }
+
+        public List<OperationClaim> GetAllClaims(Expression<Func<OperationClaim, bool>> filter = null)
+        {
+            using(ReCapContext context = new ReCapContext())
+            {
+                return context.Set<OperationClaim>().Where(filter).ToList();
+            }
+        }
     }
 }

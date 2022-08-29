@@ -16,6 +16,7 @@ namespace Business.Abstract
         IDataResult<User> GetByUserId(int userId);
         IDataResult<List<OperationClaim>> GetUserClaims(User user);
         IDataResult<List<OperationClaim>> GetClaimsById(int userId);
+        IDataResult<List<OperationClaim>> GetAllClaims();
         IDataResult<int> GetUserFindeks(int userId);
         IResult AddFindeks(int userId, int findeks);
         IResult AddUserOperationClaim(UserOperationClaim userOperationClaim);

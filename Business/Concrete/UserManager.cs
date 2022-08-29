@@ -137,6 +137,13 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ClaimDeleted);
         }
 
+
+        public IDataResult<List<OperationClaim>> GetAllClaims()
+        {
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetAllClaims(), Messages.ClaimsListed);
+        }
+
+
         //Business Rules
 
         private IResult IsUserExist(int userId)
