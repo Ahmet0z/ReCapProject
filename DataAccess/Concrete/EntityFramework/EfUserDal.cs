@@ -78,7 +78,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using(ReCapContext context = new ReCapContext())
             {
-                return context.Set<OperationClaim>().SingleOrDefault(filter);
+                return filter == null ? context.Set<OperationClaim>().SingleOrDefault() : context.Set<OperationClaim>().SingleOrDefault(filter);
             }
         }
 
@@ -86,7 +86,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (ReCapContext context = new ReCapContext())
             {
-                return context.Set<UserOperationClaim>().SingleOrDefault(filter);
+                return filter == null ? context.Set<UserOperationClaim>().SingleOrDefault() : context.Set<UserOperationClaim>().SingleOrDefault(filter);
             }
         }
 
@@ -94,7 +94,16 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using(ReCapContext context = new ReCapContext())
             {
-                return context.Set<OperationClaim>().Where(filter).ToList();
+                return filter == null ? context.Set<OperationClaim>().ToList() : context.Set<OperationClaim>().Where(filter).ToList();
+            }
+        }
+
+        public void DisableUser(User user)
+        {
+            using(ReCapContext context = new ReCapContext())
+            {
+                user.Status = false;
+                Update(user);
             }
         }
     }

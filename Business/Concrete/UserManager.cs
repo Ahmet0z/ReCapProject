@@ -144,6 +144,12 @@ namespace Business.Concrete
             return new SuccessDataResult<List<OperationClaim>>(_userDal.GetAllClaims(), Messages.ClaimsListed);
         }
 
+        public IResult DisableUser(User user)
+        {
+            _userDal.DisableUser(user);
+            return new SuccessResult(Messages.UserDisabled);
+        }
+
 
         //Business Rules
 
@@ -180,5 +186,6 @@ namespace Business.Concrete
 
             return new ErrorResult();
         }
+
     }
 }

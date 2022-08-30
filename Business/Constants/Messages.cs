@@ -30,6 +30,7 @@
         public static string UsersListed = "Kullanıcılar listelendi";
         public static string UserGetted = "Kullanıcı getirildi";
         public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string UserDisabled = "Kullanıcı Devre Dışı Bırakıldı.";
 
         public static string CardAdded = "Kart eklendi";
         public static string CardDeleted = "Kart silindi.";
@@ -74,7 +75,5 @@
         public static string cardNotFound = "Böyle bir kart bulunamadı.";
 
         public static string PasswordChanged = "Şifre değiştirildi.";
-
-
     }
 }

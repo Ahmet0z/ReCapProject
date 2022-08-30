@@ -71,6 +71,18 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getallclaims")]
+        public IActionResult GetAllClaims()
+        {
+            var result = _userService.GetAllClaims();
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpGet("getbyuserid")]
         public IActionResult GetByUserId(int userId)
         {
@@ -118,6 +130,18 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
 
+            return BadRequest(result);
+        }
+
+        [HttpPost("disableuser")]
+        public IActionResult DisableUser(User user)
+        {
+            var result = _userService.DisableUser(user);
+            
+            if (result.Success)
+            {
+                return Ok(result);
+            }
             return BadRequest(result);
         }
     }

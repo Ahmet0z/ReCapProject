@@ -22,5 +22,6 @@ namespace Business.Abstract
         IResult AddFindeks(int userId, int findeks);
         IResult AddUserOperationClaim(UserOperationClaim userOperationClaim);
         IResult DeleteUserOperationClaim(UserOperationClaim userOperationClaim);
+        IResult DisableUser(User user);
     }
 }

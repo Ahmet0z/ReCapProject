@@ -18,5 +18,6 @@ namespace DataAccess.Abstract
         void AddCLaim(UserOperationClaim userOperationClaim);
         void DeleteClaim(UserOperationClaim userOperationClaim);
         void AddFindeks(int userId, int findeks);
+        void DisableUser(User user);
     }
 }
