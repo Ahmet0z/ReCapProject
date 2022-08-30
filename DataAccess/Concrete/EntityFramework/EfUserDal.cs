@@ -8,6 +8,7 @@ using Entities.DTOs;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using Core.Entities.DTOs;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -27,17 +28,19 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public List<OperationClaim> GetClaimsByUserId(int userId)
+        public GetUserClaimsDto GetClaimsByUserId(int userId)
         {
             using (var context = new ReCapContext())
             {
-                var result = from operationClaim in context.OperationClaims
+                var operationClaims = from operationClaim in context.OperationClaims
                              join userOperationClaim in context.UserOperationClaims
                                  on operationClaim.Id equals userOperationClaim.OperationClaimId
                              where userOperationClaim.UserId == userId
                              select new OperationClaim { Id = operationClaim.Id, Name = operationClaim.Name };
 
-                return result.ToList();
+                var userClaims = context.Set<UserOperationClaim>().Where(u => u.UserId == userId).ToList();
+
+                return new GetUserClaimsDto() { operationClaim = operationClaims.ToList(), userOperationClaim = userClaims };
             }
         }
 

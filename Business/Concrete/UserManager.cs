@@ -10,6 +10,7 @@ using Business.BusinessAspects.Autofac;
 using Core.Utilities.Security.Hashing;
 using Entities.DTOs;
 using Core.Utilities.Business;
+using Core.Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -80,9 +81,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user), Messages.ClaimsListed);
         }
 
-        public IDataResult<List<OperationClaim>> GetClaimsById(int userId)
+        public IDataResult<GetUserClaimsDto> GetClaimsById(int userId)
         {
-            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaimsByUserId(userId));
+            return new SuccessDataResult<GetUserClaimsDto>(_userDal.GetClaimsByUserId(userId), Messages.ClaimsListed);
         }
 
         public IDataResult<int> GetUserFindeks(int userId)
