@@ -81,6 +81,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user), Messages.ClaimsListed);
         }
 
+        [SecuredOperation("admin")]
         public IDataResult<GetUserClaimsDto> GetClaimsById(int userId)
         {
             return new SuccessDataResult<GetUserClaimsDto>(_userDal.GetClaimsByUserId(userId), Messages.ClaimsListed);
@@ -111,9 +112,11 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("admin")]
+        [ValidationAspect(typeof(UserOperationClaimValidator))]
         public IResult AddUserOperationClaim(UserOperationClaim userOperationClaim)
         {
-            var result = BusinessRules.Run(IsClaimExist(userOperationClaim.OperationClaimId), IsUserExist(userOperationClaim.UserId));
+            var result = BusinessRules.Run(IsClaimExist(userOperationClaim.OperationClaimId), IsUserExist(userOperationClaim.UserId), 
+                IsUserHasClaim(userOperationClaim.UserId, userOperationClaim.OperationClaimId));
 
             if (result != null)
             {
@@ -138,12 +141,13 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ClaimDeleted);
         }
 
-
+        [SecuredOperation("admin")]
         public IDataResult<List<OperationClaim>> GetAllClaims()
         {
             return new SuccessDataResult<List<OperationClaim>>(_userDal.GetAllClaims(), Messages.ClaimsListed);
         }
 
+        [SecuredOperation("admin")]
         public IResult DisableUser(User user)
         {
             _userDal.DisableUser(user);
@@ -181,10 +185,10 @@ namespace Business.Concrete
 
             if (result != null)
             {
-                return new SuccessResult();
+                return new ErrorResult();
             }
 
-            return new ErrorResult();
+            return new SuccessResult();
         }
 
     }
