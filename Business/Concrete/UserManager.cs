@@ -183,7 +183,7 @@ namespace Business.Concrete
         {
             var result = _userDal.GetUserOperationClaim(uoc => uoc.UserId == userId && uoc.OperationClaimId == operationClaimId);
 
-            if (result != null)
+            if (result == null)
             {
                 return new ErrorResult();
             }
