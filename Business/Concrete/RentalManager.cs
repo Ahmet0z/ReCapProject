@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using Business.BusinessAspects.Autofac;
 using Core.Utilities.Business;
+using Core.Entities.Concrete;
 
 namespace Business.Concrete
 {
@@ -75,6 +76,25 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalUpdated);
         }
 
+        public IDataResult<List<RentalDetailDto>> GetRentalDetailsByUser(int userId)
+        {
+            var result = _rentalDal.GetRentalDetails(r=> r.UserId == userId);
+            return new SuccessDataResult<List<RentalDetailDto>>(result, Messages.RentalDetailsListed);
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetRentalDetailsByCar(int carId)
+        {
+            var result = _rentalDal.GetRentalDetails(r => r.CarId == carId);
+            return new SuccessDataResult<List<RentalDetailDto>>(result, Messages.RentalDetailsListed);
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetRentalDetailsByCarAndUser(int carId, int userId)
+        {
+            var result = _rentalDal.GetRentalDetails(r => r.UserId == userId && r.CarId == carId);
+            return new SuccessDataResult<List<RentalDetailDto>>(result, Messages.RentalDetailsListed);
+        }
+
+
 
         //Business Codes
 
@@ -122,5 +142,6 @@ namespace Business.Concrete
 
             return new ErrorResult(Messages.CarIsOnRent);
         }
+
     }
 }
