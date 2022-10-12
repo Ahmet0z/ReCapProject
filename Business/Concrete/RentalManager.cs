@@ -31,6 +31,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         [CacheRemoveAspect("IRentalService.get")]
         [CacheRemoveAspect("ICarService.get")]
+        [SecuredOperation("admin,user")]
         public IResult Add(Rental rental)
         {
             var result = BusinessRules.Run(IsFindexEnough(rental), CheckIsCarRentable(rental.CarId));
@@ -63,6 +64,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
+        [SecuredOperation("admin")]
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(), Messages.RentalDetailsListed);
@@ -76,18 +78,21 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalUpdated);
         }
 
+        [SecuredOperation("user")]
         public IDataResult<List<RentalDetailDto>> GetRentalDetailsByUser(int userId)
         {
             var result = _rentalDal.GetRentalDetails(r=> r.UserId == userId);
             return new SuccessDataResult<List<RentalDetailDto>>(result, Messages.RentalDetailsListed);
         }
 
+        [SecuredOperation("admin")]
         public IDataResult<List<RentalDetailDto>> GetRentalDetailsByCar(int carId)
         {
             var result = _rentalDal.GetRentalDetails(r => r.CarId == carId);
             return new SuccessDataResult<List<RentalDetailDto>>(result, Messages.RentalDetailsListed);
         }
 
+        [SecuredOperation("admin,user")]
         public IDataResult<List<RentalDetailDto>> GetRentalDetailsByCarAndUser(int carId, int userId)
         {
             var result = _rentalDal.GetRentalDetails(r => r.UserId == userId && r.CarId == carId);

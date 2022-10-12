@@ -33,6 +33,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  Description = c.Description,
                                  ModelYear = c.ModelYear,
                                  Findeks = c.Findeks,
+                                 Plate = c.Plate,
 
                                  IsRentable = !context.Rentals.Any(r => r.CarId == c.Id && (r.ReturnDate == null || (r.ReturnDate.HasValue && r.ReturnDate > DateTime.Now))),
                                  ImagePath = (from ci in context.CarImages where c.Id == ci.CarId select ci.ImagePath).FirstOrDefault()

@@ -23,6 +23,7 @@ namespace Business.Concrete
 
             }
 
+            [SecuredOperation("user,admin")]
             public IResult Add(Payment payment)
             {
                 var result = BusinessRules.Run(CheckCardExist(payment.CreditCardNumber, payment.ExpirationDate,
@@ -43,6 +44,7 @@ namespace Business.Concrete
                 return new SuccessResult();
             }
 
+            [SecuredOperation("admin")]
             public IDataResult<Payment> Get(Payment payment)
             {
                 return new SuccessDataResult<Payment>(_paymentDal.Get(x => x.PaymentId == payment.PaymentId));

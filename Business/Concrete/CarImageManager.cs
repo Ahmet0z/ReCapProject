@@ -46,7 +46,7 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == imageId), Messages.ImagessListed);
         }
 
-        //[SecuredOperation("admin")]
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Image image, CarImage carImage)

@@ -1,0 +1,75 @@
+insert into Brands (BrandName) values ('Ford');
+insert into Brands (BrandName) values ('BMW');
+insert into Brands (BrandName) values ('Mazda');
+insert into Brands (BrandName) values ('Volkswagen');
+insert into Brands (BrandName) values ('Mercedes-Benz');
+insert into Brands (BrandName) values ('Nissan');
+insert into Brands (BrandName) values ('Jaguar');
+insert into Brands (BrandName) values ('Land Rover');
+insert into Brands (BrandName) values ('Honda');
+insert into Brands (BrandName) values ('Chrysler');
+insert into Brands (BrandName) values ('GMC');
+insert into Brands (BrandName) values ('Chevrolet');
+
+insert into Colors (ColorName) values ('Beyaz');
+insert into Colors (ColorName) values ('Kýrmýzý');
+insert into Colors (ColorName) values ('Mavi');
+insert into Colors (ColorName) values ('Siyah');
+insert into Colors (ColorName) values ('Gri');
+insert into Colors (ColorName) values ('Sarý');
+insert into Colors (ColorName) values ('Lacivert');
+
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (1, 3, 'RX 7', 2010, 300, 'Otomatik', 450, '55 KQ 4555');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (5, 4, 'Passat', 2005, 600, 'Otomatik', 300, '48 PP 8873');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (4, 7, 'F Type', 2012, 550, 'Otomatik', 400, '67 KC 6063');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (3, 9, 'Civic', 2020, 300, 'Otomatik', 200, '54 IC 5702');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (6, 6, 'Juke', 2021, 250, 'Manuel', 150, '40 BH 0154');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (3, 4, 'Arteon', 2016, 600, 'Otomatik', 300, '33 ZT 3680');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (7, 8, 'Discovery', 2019, 500, 'Otomatik', 450, '72 NI 3003');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (1, 2, 'X5', 2011, 750, 'Otomatik', 300, '22 VO 0829');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (7, 3, 'CX 5', 2000, 450, 'Otomatik', 250, '24 CF 6116');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (4, 4, 'Beetle', 2015, 900, 'Otomatik', 200, '98 YI 1064');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (4, 7, 'X Type', 2009, 550, 'Otomatik', 300, '79 ZN 7357');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (2, 2, '5 Series', 2000, 500, 'Otomatik', 350, '65 FJ 2693');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (5, 9, 'CRV', 2002, 900, 'Otomatik', 250, '87 ZO 1244');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (6, 11, 'Canyon', 2009, 850, 'Otomatik', 500, '53 KS 1339');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (2, 12, 'Camaro', 2009, 400, 'Otomatik', 600, '19 RB 9250');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (5, 3, 'CX 9', 2006, 300, 'Otomatik', 450, '14 TU 5897');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (6, 6, 'GTR', 2005, 450, 'Otomatik', 700, '40 RD 1305');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (1, 5, 'AMG G63', 2012, 550, 'Otomatik', 700, '47 WS 3342');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (6, 8, 'Velar', 2019, 700, 'Otomatik', 450, '59 FX 5850');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (6, 5, 'A200', 2004, 850, 'Otomatik', 350, '26 RH 2654');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (3, 5, 'CLA 180', 2000, 800, 'Otomatik', 250, '78 KO 3517');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (8, 10, '300C', 2006, 550, 'Otomatik', 600, '18 CP 4986');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (4, 12, 'Tahoe', 2002, 850, 'Otomatik', 350, '55 BK 1189');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (3, 11, 'Sierra', 2015, 900, 'Otomatik', 450, '24 OJ 3815');
+insert into Cars (ColorId, BrandId, CarName, ModelYear, DailyPrice, Description, Findeks, Plate) values (4, 1, 'Mustang', 2020, 650, 'Otomatik', 600, '32 GN 4211');
+
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Aldis', 'Adams', 'aadams0@scribd.com', null, null, 1, 682);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Kinsley', 'Leadbetter', 'kleadbetter1@youtu.be', null, null, 1, 239);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Daryn', 'Cromly', 'dcromly2@boston.com', null, null, 1, 448);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Elisabetta', 'Basile', 'ebasile3@altervista.org', null, null, 1, 362);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Richy', 'Van', 'rvan4@networksolutions.com', null, null, 1, 237);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Lynne', 'Gorring', 'lgorring5@reddit.com', null, null, 1, 832);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Nat', 'Ibbeson', 'nibbeson6@angelfire.com', null, null, 1, 954);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Donnie', 'Warin', 'dwarin7@comsenz.com', null, null, 1, 218);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Dunstan', 'Howton', 'dhowton8@netlog.com', null, null, 1, 317);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Torrance', 'Coombes', 'tcoombes9@loc.gov', null, null, 1, 501);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Clementia', 'McDavitt', 'cmcdavitta@google.cn', null, null, 1, 932);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Trev', 'Rennison', 'trennisonb@washingtonpost.com', null, null, 1, 240);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Lenora', 'Smythe', 'lsmythec@angelfire.com', null, null, 1, 474);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Camille', 'Diano', 'cdianod@acquirethisname.com', null, null, 1, 182);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Nataniel', 'Lenz', 'nlenze@jiathis.com', null, null, 1, 548);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Enid', 'Vigars', 'evigarsf@bing.com', null, null, 1, 288);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Lissie', 'Abdey', 'labdeyg@github.com', null, null, 1, 709);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Verine', 'Byfford', 'vbyffordh@unc.edu', null, null, 1, 597);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Brockie', 'Winterbotham', 'bwinterbothami@photobucket.com', null, null, 1, 976);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Holly', 'Remon', 'hremonj@answers.com', null, null, 1, 684);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Tiertza', 'Bremmell', 'tbremmellk@gravatar.com', null, null, 1, 667);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Miner', 'Readmire', 'mreadmirel@w3.org', null, null, 1, 994);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Bobbee', 'Eidler', 'beidlerm@aboutads.info', null, null, 1, 796);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Jakob', 'Kieran', 'jkierann@senate.gov', null, null, 1, 147);
+insert into Users (FirstName, LastName, Email, PasswordSalt, PasswordHash, Status, Findeks) values ('Silvana', 'Browse', 'sbrowseo@smh.com.au', null, null, 1, 920);
+
+insert into OperationClaims values ('admin')
+insert into OperationClaims values ('user')

@@ -73,6 +73,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ColorUpdated);
         }
 
+        //Business Rules
+
         private IDataResult<int> CheckIfColorExist(int colorId)
         {
             var result = _colorDal.Get(c => c.ColorId == colorId);
