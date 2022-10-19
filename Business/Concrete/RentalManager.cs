@@ -92,7 +92,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailDto>>(result, Messages.RentalDetailsListed);
         }
 
-        [SecuredOperation("admin,user")]
+        [SecuredOperation("user")]
         public IDataResult<List<RentalDetailDto>> GetRentalDetailsByCarAndUser(int carId, int userId)
         {
             var result = _rentalDal.GetRentalDetails(r => r.UserId == userId && r.CarId == carId);
