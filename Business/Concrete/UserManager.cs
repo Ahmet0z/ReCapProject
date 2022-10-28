@@ -176,7 +176,7 @@ namespace Business.Concrete
                 return new SuccessResult();
             }
 
-            return new ErrorResult();
+            return new ErrorResult(Messages.InvalidClaimId);
         }
 
         private IResult IsUserHasClaim(int userId, int operationClaimId)
@@ -185,10 +185,10 @@ namespace Business.Concrete
 
             if (result == null)
             {
-                return new ErrorResult();
+                return new SuccessResult();
             }
 
-            return new SuccessResult();
+            return new ErrorResult(Messages.UserAlreadyHaveThisClaim);
         }
 
     }

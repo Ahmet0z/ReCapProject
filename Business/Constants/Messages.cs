@@ -65,6 +65,8 @@
         public static string ClaimsListed = "Roller Listelendi";
         public static string ClaimAdded = "Yetki eklendi";
         public static string ClaimDeleted = "Yetki Silindi";
+        public static string InvalidClaimId = "Böyle bir rol bulunmamaktadır.";
+        public static string UserAlreadyHaveThisClaim = "Bu rol kullanıcıda mevcut.";
 
         public static string PasswordError = "Şifre hatalı";
         public static string SuccessfulLogin = "Giriş başarılı";
