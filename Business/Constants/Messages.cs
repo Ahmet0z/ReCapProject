@@ -1,4 +1,6 @@
-﻿namespace Business.Constants
+﻿using Entities.Concrete;
+
+namespace Business.Constants
 {
     public static class Messages
     {
@@ -72,10 +74,13 @@
         public static string SuccessfulLogin = "Giriş başarılı";
         public static string UserAlreadyExists = "Kullanıcı mevcut";
         public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
+        public static string PasswordChanged = "Şifre değiştirildi.";
 
         public static string AuthorizationDenied = "Yetkiniz bulunmamaktadır.";
-        public static string cardNotFound = "Böyle bir kart bulunamadı.";
 
-        public static string PasswordChanged = "Şifre değiştirildi.";
+        public static string PaymentNotFound = "Ödeme bulunamadı";
+        public static string cardNotFound = "Böyle bir kart bulunamadı.";
+        public static string CardExists = "Bu kart mevcut";
+
     }
 }

@@ -30,7 +30,7 @@ namespace Business.Concrete
                     payment.SecurityCode));
                 if (result != null)
                 {
-                    return new ErrorResult();
+                    return new ErrorResult(result.Message);
                 }
 
                 _paymentDal.Add(payment);
@@ -62,7 +62,7 @@ namespace Business.Concrete
                 var result = _paymentDal.Get(x => x.PaymentId == paymentId);
                 if (result == null)
                 {
-                    return new ErrorDataResult<Payment>();
+                    return new ErrorDataResult<Payment>(Messages.PaymentNotFound);
                 }
 
                 return new SuccessDataResult<Payment>(result);

@@ -28,7 +28,7 @@ namespace Business.Concrete
 
             if (result != null)
             {
-                return new ErrorResult();
+                return new ErrorResult(result.Message);
             }
             _cardDal.Add(card);
             return new SuccessResult(Messages.CardAdded);
@@ -52,7 +52,7 @@ namespace Business.Concrete
             var result = BusinessRules.Run(IsCustomerExist(userId));
             if (result == null)
             {
-                return new ErrorDataResult<Card>();
+                return new ErrorDataResult<Card>(result.Message);
             }
 
             return new SuccessDataResult<Card>(_cardDal.Get(c => c.UserId == userId));
@@ -64,7 +64,7 @@ namespace Business.Concrete
             var result = BusinessRules.Run(IsCustomerExist(userId));
             if (result != null)
             {
-                return new ErrorDataResult<List<Card>>();
+                return new ErrorDataResult<List<Card>>(result.Message);
             }
             return new SuccessDataResult<List<Card>>(_cardDal.GetAll(x => x.UserId == userId));
 
@@ -92,8 +92,7 @@ namespace Business.Concrete
 
             if (result != null)
             {
-                return new ErrorResult("Kredi Kartı Mevcut");
-
+                return new ErrorResult(Messages.CardExists);
             }
             return new SuccessResult();
 
@@ -104,7 +103,7 @@ namespace Business.Concrete
             var result = _userService.GetByUserId(userId);
             if (result == null)
             {
-                return new ErrorResult();
+                return new ErrorResult(Messages.UserNotFound);
             }
             return new SuccessResult();
         }

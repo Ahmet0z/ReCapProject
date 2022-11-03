@@ -48,6 +48,7 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId), Messages.UserGetted);
         }
 
+        [SecuredOperation("user,admin")]
         public IResult ChangeUserPassword(ChangePasswordDto changePasswordDto)
         {
             byte[] passwordHash, passwordSalt;
@@ -58,10 +59,7 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.UserNotFound);
             }
 
-            if (!HashingHelper.VerifyPasswordHash(changePasswordDto.OldPassword, userToCheck.Data.PasswordHash, userToCheck.Data.PasswordSalt))
-            {
-                return new ErrorResult(Messages.PasswordError);
-            }
+            var result = BusinessRules.Run(IsPasswordCorrect(changePasswordDto.OldPassword, userToCheck.Data.PasswordHash, userToCheck.Data.PasswordSalt));
 
             HashingHelper.CreatePasswordHash(changePasswordDto.NewPassword, out passwordHash, out passwordSalt);
             userToCheck.Data.PasswordHash = passwordHash;
@@ -99,6 +97,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [SecuredOperation("user,admin")]
         public IResult Update(UserUpdateDto user)
         {
             var userToUpdate = GetByMail(user.Email);
@@ -165,7 +164,7 @@ namespace Business.Concrete
                 return new SuccessResult();
             }
 
-            return new ErrorResult();
+            return new ErrorResult(Messages.UserNotFound);
         }
 
         private IResult IsClaimExist(int operationClaimId)
@@ -189,6 +188,15 @@ namespace Business.Concrete
             }
 
             return new ErrorResult(Messages.UserAlreadyHaveThisClaim);
+        }
+
+        private IResult IsPasswordCorrect(string oldPassword, byte[] passwordHash, byte[] passwordSalt)
+        {
+            if (!HashingHelper.VerifyPasswordHash(oldPassword, passwordHash, passwordSalt))
+            {
+                return new ErrorResult(Messages.PasswordError);
+            }
+            return new SuccessResult();
         }
 
     }

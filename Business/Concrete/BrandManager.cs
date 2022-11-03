@@ -43,7 +43,7 @@ namespace Business.Concrete
             var result = BusinessRules.Run(CheckIfBrandExist(brandId));
             if (result != null)
             {
-                return new ErrorDataResult<Brand>(Messages.BrandNotFound);
+                return new ErrorDataResult<Brand>(result.Message);
             }
             return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == brandId));
         }
@@ -69,9 +69,9 @@ namespace Business.Concrete
             var result = _brandDal.Get(b => b.BrandId == brandId);
             if (result == null)
             {
-                return new ErrorDataResult<int>();
+                return new ErrorDataResult<int>(Messages.BrandNotFound);
             }
-            return new SuccessDataResult<int>(brandId);
+            return new SuccessDataResult<int>();
         }
     }
 }

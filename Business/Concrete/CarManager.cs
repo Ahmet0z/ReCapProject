@@ -127,7 +127,7 @@ namespace Business.Concrete
             {
                 return new SuccessResult();
             }
-            return new ErrorResult();
+            return new ErrorResult(Messages.BrandNotFound);
         }
 
         private IResult IsColorExists(int colorId)
@@ -135,9 +135,9 @@ namespace Business.Concrete
             var result = _colorService.GetById(colorId);
             if (result != null)
             {
-                return new ErrorResult();
+                return new SuccessResult();
             }
-            return new SuccessResult();
+            return new ErrorResult(Messages.ColorNotFound);
         }
 
         private IResult IsCarExist(int carId)

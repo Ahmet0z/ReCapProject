@@ -55,7 +55,7 @@ namespace Business.Concrete
             IResult rulesResult = BusinessRules.Run(CheckIfCarImageLimitExceeded(carImage.CarId));
             if (rulesResult != null)
             {
-                return rulesResult;
+                return new ErrorResult(rulesResult.Message);
             }
 
             //var imageResult = FileHelper.Upload(carImage.Image.File);
@@ -74,11 +74,11 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(CarImage carImage, Image image)
         {
-            IResult rulesResult = BusinessRules.Run(CheckIfCarIdExist(carImage.Id),
+            var rulesResult = BusinessRules.Run(CheckIfCarIdExist(carImage.Id),
                 CheckIfCarImageLimitExceeded(carImage.CarId));
             if (rulesResult != null)
             {
-                return rulesResult;
+                return new ErrorResult(rulesResult.Message);
             }
 
             var updatedImage = _carImageDal.Get(c => c.Id == carImage.Id);
@@ -97,10 +97,10 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(CarImage carImage)
         {
-            IResult rulesResult = BusinessRules.Run(CheckIfCarIdExist(carImage.CarId));
+            var rulesResult = BusinessRules.Run(CheckIfCarIdExist(carImage.CarId));
             if (rulesResult != null)
             {
-                return rulesResult;
+                return new ErrorResult(rulesResult.Message);
             }
 
             var deletedImage = _carImageDal.Get(c => c.Id == carImage.Id);
