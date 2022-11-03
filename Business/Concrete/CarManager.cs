@@ -36,13 +36,14 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("ICarService.get")]
+        [ValidationAspect(typeof(CarValidator))]
         [SecuredOperation("admin")]
         public IResult Update(Car car)
         {
             var result = BusinessRules.Run(IsCarExist(car.Id));
             if (result != null)
             {
-                return new ErrorResult(Messages.CarNotFound);
+                return new ErrorResult(result.Message);
             }
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
@@ -134,9 +135,9 @@ namespace Business.Concrete
             var result = _colorService.GetById(colorId);
             if (result != null)
             {
-                return new SuccessResult();
+                return new ErrorResult();
             }
-            return new ErrorResult();
+            return new SuccessResult();
         }
 
         private IResult IsCarExist(int carId)
@@ -146,7 +147,7 @@ namespace Business.Concrete
             {
                 return new SuccessResult();
             }
-            return new ErrorResult();
+            return new ErrorResult(Messages.CarNotFound);
         }
 
     }

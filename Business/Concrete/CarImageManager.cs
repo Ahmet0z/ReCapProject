@@ -13,6 +13,7 @@ using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -49,7 +50,7 @@ namespace Business.Concrete
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         [CacheRemoveAspect("ICarService.Get")]
-        public IResult Add(Image image, CarImage carImage)
+        public IResult Add(CarImage carImage)
         {
             IResult rulesResult = BusinessRules.Run(CheckIfCarImageLimitExceeded(carImage.CarId));
             if (rulesResult != null)
@@ -57,13 +58,13 @@ namespace Business.Concrete
                 return rulesResult;
             }
 
-            var imageResult = FileHelper.Upload(image.File);
+            //var imageResult = FileHelper.Upload(carImage.Image.File);
 
-            if (!imageResult.Success)
-            {
-                return new ErrorResult(imageResult.Message);
-            }
-            carImage.ImagePath = imageResult.Message;
+            //if (!imageResult.Success)
+            //{
+            //    return new ErrorResult(imageResult.Message);
+            //}
+            //carImage.CarImage.ImagePath = imageResult.Message;
             _carImageDal.Add(carImage);
             return new SuccessResult(Messages.ImageAdded);
         }

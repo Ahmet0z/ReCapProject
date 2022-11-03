@@ -22,7 +22,7 @@
         public static string ColorUpdated = "Renk güncellendi";
         public static string ColorsListed = "Renkler Listelendi";
         public static string ColorNotFound = "Renk bulunamadı";
-        public static string ColorAlreadyUse = "Bu renk zaten var.";
+        public static string ColorExists = "Bu renk zaten var.";
 
         public static string UserAdded = "Kullanıcı eklendi";
         public static string UserDeleted = "Kullanıcı silindi";

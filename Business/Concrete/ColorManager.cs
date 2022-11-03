@@ -29,7 +29,7 @@ namespace Business.Concrete
             var result = BusinessRules.Run(CheckIfColorNameExist(color.ColorName));
             if (result != null)
             {
-                return new ErrorResult(Messages.ColorAlreadyUse);
+                return new ErrorResult(result.Message);
             }
 
             _colorDal.Add(color); ;
@@ -55,7 +55,7 @@ namespace Business.Concrete
             var result = BusinessRules.Run(CheckIfColorExist(colorId));
             if (result != null)
             {
-                return new ErrorDataResult<Color>(Messages.ColorNotFound);
+                return new ErrorDataResult<Color>(result.Message);
             }
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == colorId));
         }
@@ -67,7 +67,7 @@ namespace Business.Concrete
             var result = BusinessRules.Run(CheckIfColorExist(color.ColorId));
             if (result != null)
             {
-                return new ErrorDataResult<Color>(Messages.ColorNotFound);
+                return new ErrorDataResult<Color>(result.Message);
             }
             _colorDal.Update(color);
             return new SuccessResult(Messages.ColorUpdated);
@@ -80,9 +80,9 @@ namespace Business.Concrete
             var result = _colorDal.Get(c => c.ColorId == colorId);
             if (result == null)
             {
-                return new ErrorDataResult<int>();
+                return new SuccessDataResult<int>();
             }
-            return new SuccessDataResult<int>(colorId);
+            return new ErrorDataResult<int>(Messages.ColorExists);
         }
 
         private IDataResult<string> CheckIfColorNameExist(string colorName)
@@ -90,9 +90,9 @@ namespace Business.Concrete
             var result = _colorDal.GetByColorName(colorName);
             if (result == null)
             {
-                return new ErrorDataResult<string>(Messages.ColorNotFound);
+                return new SuccessDataResult<string>();
             }
-            return new SuccessDataResult<string>(result.ColorName);
+            return new ErrorDataResult<string>(Messages.ColorExists);
         }
     }
 }
