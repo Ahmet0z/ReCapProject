@@ -11,6 +11,6 @@ namespace Entities.DTOs
     public class AddCarImageDTO
     {
         public Image Image { get; set; }
-        public CarImage CarImage { get; set; }
+        public int CarId { get; set; }
     }
 }

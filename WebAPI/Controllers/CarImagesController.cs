@@ -1,7 +1,9 @@
 ﻿using Business.Abstract;
 using Core.Entities.Concrete;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -51,10 +53,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(CarImage carImage)
+        public IActionResult Add([FromForm] CarImage carImage,[FromForm]Image image)
         {
 
-            var result = _carImageService.Add(carImage);
+            var result = _carImageService.Add((IFormFile)image, carImage);
             if (result.Success)
             {
                 return Ok(result);

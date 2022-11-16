@@ -14,6 +14,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Microsoft.AspNetCore.Http;
 
 namespace Business.Concrete
 {
@@ -47,10 +48,10 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == imageId), Messages.ImagessListed);
         }
 
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         [CacheRemoveAspect("ICarService.Get")]
-        public IResult Add(CarImage carImage)
+        public IResult Add(IFormFile file,CarImage carImage)
         {
             IResult rulesResult = BusinessRules.Run(CheckIfCarImageLimitExceeded(carImage.CarId));
             if (rulesResult != null)
@@ -58,15 +59,16 @@ namespace Business.Concrete
                 return new ErrorResult(rulesResult.Message);
             }
 
-            //var imageResult = FileHelper.Upload(carImage.Image.File);
+            var imageResult = FileHelper.Upload(file);
 
-            //if (!imageResult.Success)
-            //{
-            //    return new ErrorResult(imageResult.Message);
-            //}
-            //carImage.CarImage.ImagePath = imageResult.Message;
+            if (!imageResult.Success)
+            {
+                return new ErrorResult(imageResult.Message);
+            }
+            carImage.ImagePath = imageResult.Message;
+
             _carImageDal.Add(carImage);
-            return new SuccessResult(Messages.ImageAdded);
+            return new SuccessResult(imageResult.ToString());
         }
 
         [SecuredOperation("admin")]

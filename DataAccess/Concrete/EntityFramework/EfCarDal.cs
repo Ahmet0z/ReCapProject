@@ -38,7 +38,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  IsRentable = !context.Rentals.Any(r => r.CarId == c.Id && (r.ReturnDate == null || (r.ReturnDate.HasValue && r.ReturnDate > DateTime.Now))),
                                  ImagePath = (from ci in context.CarImages where c.Id == ci.CarId select ci.ImagePath).FirstOrDefault()
                              };
-                return filter == null ? result.ToList() : result.Where(filter).ToList();
+                return filter == null ? result.OrderByDescending(c => c.Id).ToList() : result.Where(filter).OrderByDescending(c => c.Id).ToList();
             }
         }
     }

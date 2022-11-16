@@ -1,4 +1,6 @@
 ﻿using Core.Entities;
+using Core.Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using System;
 
 namespace Entities.Concrete
@@ -9,6 +11,7 @@ namespace Entities.Concrete
         {
             Date = DateTime.Now;
         }
+
         public int Id { get; set; }
         public int CarId { get; set; }
         public string ImagePath { get; set; }   
